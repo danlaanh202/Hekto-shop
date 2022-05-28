@@ -8,9 +8,9 @@ const SponsorS = styled.div`
   .sponsor {
   }
 `;
-const Sponsor = () => {
+const Sponsor = ({ className }) => {
   return (
-    <SponsorS>
+    <SponsorS className={`shadow-lg ${className}`}>
       <img srcSet="/image/sponsor.png" className="sponsor" alt="" />
     </SponsorS>
   );

@@ -1,5 +1,7 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+
 const PrimaryButtonStyles = styled.button`
   background: ${(props) => props.theme.pinkSecondary};
   border-radius: 2px;
@@ -17,9 +19,15 @@ const PrimaryButtonStyles = styled.button`
   max-width: 165px;
   cursor: pointer;
 `;
-const PrimaryButton = ({ children, className }) => {
+const PrimaryButton = ({ children, className, to }) => {
+  const navigate = useNavigate();
   return (
-    <PrimaryButtonStyles className={className}>{children}</PrimaryButtonStyles>
+    <PrimaryButtonStyles
+      onClick={() => to && navigate(to)}
+      className={className}
+    >
+      {children}
+    </PrimaryButtonStyles>
   );
 };
 

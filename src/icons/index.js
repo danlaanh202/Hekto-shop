@@ -12,6 +12,11 @@ import StarIcon from "./StarIcon";
 import FacebookIconShare from "./FacebookIconShare";
 import InstagramIconShare from "./InstagramIconShare";
 import TwiiterIconShare from "./TwiiterIconShare";
+import RightArrow from "./RightArrow";
+import CloseIcon from "./CloseIcon";
+import CompletedIcon from "./CompletedIcon";
+import AuthorIcon from "./AuthorIcon";
+import DateIcon from "./DateIcon";
 
 export {
   EmailIcon,
@@ -28,4 +33,9 @@ export {
   FacebookIconShare,
   InstagramIconShare,
   TwiiterIconShare,
+  RightArrow,
+  CloseIcon,
+  CompletedIcon,
+  AuthorIcon,
+  DateIcon,
 };
