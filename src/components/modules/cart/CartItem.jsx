@@ -52,7 +52,7 @@ const CartItemStyles = styled.div`
       width: 12px;
       height: 100%;
       background: #e7e7ef;
-      color: #bebfc2;
+      /* color: #bebfc2; */
     }
     .quantity-number {
       background: #f0eff2;
@@ -60,7 +60,7 @@ const CartItemStyles = styled.div`
       width: 50px;
       display: block;
       text-align: center;
-      color: #bebfc2;
+      /* color: #bebfc2; */
     }
   }
   .total-price {

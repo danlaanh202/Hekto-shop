@@ -1,8 +1,9 @@
 import React from "react";
 
-const TwiiterIconShare = () => {
+const TwitterIconShare = ({ className }) => {
   return (
     <svg
+      className={className}
       width="12"
       height="12"
       viewBox="0 0 12 12"
@@ -30,4 +31,4 @@ const TwiiterIconShare = () => {
   );
 };
 
-export default TwiiterIconShare;
+export default TwitterIconShare;

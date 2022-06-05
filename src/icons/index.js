@@ -11,12 +11,14 @@ import SearchPlusBig from "./SearchPlusBig";
 import StarIcon from "./StarIcon";
 import FacebookIconShare from "./FacebookIconShare";
 import InstagramIconShare from "./InstagramIconShare";
-import TwiiterIconShare from "./TwiiterIconShare";
+import TwitterIconShare from "./TwitterIconShare";
 import RightArrow from "./RightArrow";
 import CloseIcon from "./CloseIcon";
 import CompletedIcon from "./CompletedIcon";
 import AuthorIcon from "./AuthorIcon";
 import DateIcon from "./DateIcon";
+import PrevIcon from "./PrevIcon";
+import NextIcon from "./NextIcon";
 
 export {
   EmailIcon,
@@ -32,10 +34,12 @@ export {
   StarIcon,
   FacebookIconShare,
   InstagramIconShare,
-  TwiiterIconShare,
+  TwitterIconShare,
   RightArrow,
   CloseIcon,
   CompletedIcon,
   AuthorIcon,
   DateIcon,
+  PrevIcon,
+  NextIcon,
 };

@@ -24,8 +24,10 @@ const HomePage = () => {
       <DiscountItem></DiscountItem>
       <TopCategories></TopCategories>
       <BannerBottom></BannerBottom>
-      <Sponsor></Sponsor>
       <LatestBlog></LatestBlog>
+      <div className="container">
+        <Sponsor></Sponsor>
+      </div>
     </>
   );
 };

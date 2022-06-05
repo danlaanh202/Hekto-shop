@@ -1,27 +1,29 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
+import BannerTitle from "../components/banner-title/BannerTitle";
+import PrimaryButton from "../components/button/PrimaryButton";
 const NotFound = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  margin-top: 40px;
-  h2 {
-    margin-bottom: 40px;
+  .not-found-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .img-404 {
+      /* width: 30vw; */
+    }
   }
 `;
 const NotFoundPages = () => {
   return (
-    <NotFound className="container">
-      <h2>Page not found</h2>
-      <Link to="/">Click back</Link>
-
-      <img
-        src="https://img.freepik.com/free-vector/page-found-concept-illustration_114360-1869.jpg?t=st=1653574163~exp=1653574763~hmac=1d10d3b1e935f2fad22a8e946f51dce66985fbb9d099b95e6da225666e9a3726&w=826"
-        alt=""
-        className="not-found-img"
-      />
+    <NotFound>
+      <BannerTitle title="404 NotFound"></BannerTitle>
+      <div className="container not-found-container">
+        <div className="img-404">
+          <img srcSet="/image/not-found-img.png" alt="" />
+        </div>
+        <PrimaryButton>Back To Home</PrimaryButton>
+      </div>
     </NotFound>
   );
 };

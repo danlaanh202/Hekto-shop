@@ -7,7 +7,7 @@ import Sponsor from "../components/sponsor/Sponsor";
 const BlogsPageStyles = styled.div`
   .blog-container {
     display: flex;
-    gap: 56px;
+    gap: 40px;
     margin: 50px auto;
     .blog-lists {
       width: 870px;

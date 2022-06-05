@@ -1,6 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Title from "../title/Title";
+import { SwiperSlide, Swiper } from "swiper/react";
+import "swiper/css";
+
 import FeatureProduct from "./FeatureProduct";
 const FeatureStyles = styled.div`
   width: 100%;
@@ -38,20 +41,35 @@ const FeatureStyles = styled.div`
 
 const Feature = () => {
   const [carouselNumber, setCarouselNumber] = useState(0);
+
   return (
     <FeatureStyles>
       <div className="container">
         <Title center={true}>Featured Products</Title>
-        <div className="feature">
-          <FeatureProduct></FeatureProduct>
-          <FeatureProduct></FeatureProduct>
-          <FeatureProduct></FeatureProduct>
-          <FeatureProduct></FeatureProduct>
-          <FeatureProduct></FeatureProduct>
-          <FeatureProduct></FeatureProduct>
-          <FeatureProduct></FeatureProduct>
-          <FeatureProduct></FeatureProduct>
-        </div>
+
+        <Swiper className="feature" grabCursor={true} slidesPerView="4">
+          <SwiperSlide>
+            <FeatureProduct></FeatureProduct>
+          </SwiperSlide>
+          <SwiperSlide>
+            <FeatureProduct></FeatureProduct>
+          </SwiperSlide>
+          <SwiperSlide>
+            <FeatureProduct></FeatureProduct>
+          </SwiperSlide>
+          <SwiperSlide>
+            <FeatureProduct></FeatureProduct>
+          </SwiperSlide>
+          <SwiperSlide>
+            <FeatureProduct></FeatureProduct>
+          </SwiperSlide>
+          <SwiperSlide>
+            <FeatureProduct></FeatureProduct>
+          </SwiperSlide>
+          <SwiperSlide>
+            <FeatureProduct></FeatureProduct>
+          </SwiperSlide>
+        </Swiper>
         <ul className="carousel">
           {Array(4)
             .fill("")

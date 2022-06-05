@@ -3,7 +3,7 @@ import styled from "styled-components";
 import {
   FacebookIconShare,
   InstagramIconShare,
-  TwiiterIconShare,
+  TwitterIconShare,
 } from "../../../icons";
 import StarContainer from "../../star/StarContainer";
 const PrimaryDetailStyles = styled.div`
@@ -131,7 +131,7 @@ const PrimaryDetail = () => {
             <div className="more-list icon-container">
               <FacebookIconShare></FacebookIconShare>
               <InstagramIconShare />
-              <TwiiterIconShare />
+              <TwitterIconShare />
             </div>
           </div>
         </div>

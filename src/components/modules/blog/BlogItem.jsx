@@ -49,7 +49,6 @@ const BlogItemStyles = styled.div`
     font-weight: 400;
     font-size: 16px;
     line-height: 26px;
-
     color: #8a8fb9;
     margin: 32px 0;
   }
