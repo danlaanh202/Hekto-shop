@@ -5,6 +5,7 @@ import styled from "styled-components";
 import BannerTitle from "../components/banner-title/BannerTitle";
 import ImageUpload from "../components/image/ImageUpload";
 import CategoryDropdown from "../components/modules/add-product/CategoryDropdown";
+import useImageUpload from "../hooks/useImageUpload";
 const AddProductHideStyles = styled.div`
   form {
     margin-top: 80px;
@@ -30,6 +31,22 @@ const AddProductHideStyles = styled.div`
         min-height: 100px;
         resize: vertical;
         padding: 10px;
+      }
+    }
+    .image-input-container {
+      position: relative;
+      .delete-btn {
+        z-index: 10;
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        width: 64px;
+        height: 64px;
+        color: rgb(239 68 68);
+        background: white;
+        border-radius: 100rem;
+        opacity: 100;
+        cursor: pointer;
       }
     }
 
@@ -69,7 +86,7 @@ const AddProductHideStyles = styled.div`
 `;
 const AddProductHide = () => {
   const user = useSelector((state) => state.user.currentUser);
-  console.log(user?._id);
+
   const [categories, setCategories] = useState([]); //List categories from API
   const [selectCategories, setSelectCategories] = useState([]); //change when clicked on dropdown
   const {
@@ -85,6 +102,13 @@ const AddProductHide = () => {
     mode: "onChange",
     defaultValues: {},
   });
+  const {
+    handleFileInputChange,
+    uploadImage,
+    fileInputState,
+    handleDeleteImage,
+    previewSource,
+  } = useImageUpload();
   const onAddPostHandler = (data) => {
     if (!isValid) {
       return;
@@ -147,8 +171,14 @@ const AddProductHide = () => {
               placeholder="Enter Description"
             />
           </div>
-          <div className="input-container">
-            <ImageUpload />
+          <div className="input-container image-input-container">
+            <ImageUpload
+              name="image"
+              image={previewSource}
+              handleDeleteImage={handleDeleteImage}
+              handleFileInputChange={handleFileInputChange}
+              fileInputState={fileInputState}
+            />
           </div>
           <button type="submit" className="submit-btn">
             Add Product

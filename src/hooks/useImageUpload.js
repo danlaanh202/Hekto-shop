@@ -1,23 +1,25 @@
 import { useState } from "react";
+import axios from "axios";
 
 export default function useImageUpload() {
-  const [selectedFile, setSelectedFile] = useState();
+  // const [selectedFile, setSelectedFile] = useState();
   const [previewSource, setPreviewSource] = useState("");
   const [fileInputState, setFileInputState] = useState("");
   const handleFileInputChange = (e) => {
     e.stopPropagation();
     e.preventDefault();
     const file = e.target.files[0] || e.dataTransfer.files[0];
+
     previewFile(file);
-    setSelectedFile(file);
-    setFileInputState(e.target.value);
+    // setSelectedFile(file);
+    setFileInputState(e.target.value); //file input
   };
 
   const previewFile = (file) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onloadend = () => {
-      setPreviewSource(reader.result);
+      setPreviewSource(reader.result); //64 Encoded image
     };
   };
 
@@ -36,10 +38,15 @@ export default function useImageUpload() {
       console.log(err);
     }
   };
+  const handleDeleteImage = () => {
+    setPreviewSource("");
+    setFileInputState("");
+  };
   return {
     handleFileInputChange,
     uploadImage,
     fileInputState,
     previewSource,
+    handleDeleteImage,
   };
 }
