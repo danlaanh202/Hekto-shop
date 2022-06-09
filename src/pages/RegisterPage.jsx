@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { Link } from "react-router-dom";
+import { publicRequest } from "../request-method/requestMethod";
 const schema = yup.object({
   username: yup.string().required("Username is required"),
   password: yup
@@ -135,11 +136,18 @@ const RegisterPage = () => {
     resolver: yupResolver(schema),
     mode: "onSubmit",
   });
-  const onSubmitHandler = (data) => {
+  const onSubmitHandler = async (data) => {
     if (!isValid) {
       return;
     }
-    console.log(data);
+    const { username, email, password } = data;
+    console.log({ username, email, password });
+    const res = await publicRequest.post("/auth/register", {
+      username: username,
+      email: email,
+      password: password,
+    });
+    console.log(res);
   };
   return (
     <RegisterPageStyles>

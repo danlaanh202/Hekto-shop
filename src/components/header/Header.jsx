@@ -1,4 +1,5 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import {
@@ -9,6 +10,7 @@ import {
   LoginIcon,
   PhoneIcon,
 } from "../../icons";
+import { logout } from "../../redux/apiCalls";
 const HeaderStyles = styled.div`
   width: 100%;
   background: ${(props) => props.theme.purpleHeader};
@@ -40,9 +42,21 @@ const ListItem = styled.span`
     display: flex;
     gap: 4px;
   }
+  button {
+    font-family: "Josefin Sans", sans-serif;
+    background: none;
+    font-size: 16px;
+    line-height: 18.75px;
+    color: white;
+
+    font-weight: 600;
+  }
 `;
 
 const Header = () => {
+  const user = useSelector((state) => state.user.currentUser);
+  const dispatch = useDispatch();
+  console.log(user);
   return (
     <HeaderStyles>
       <div className="container">
@@ -64,15 +78,26 @@ const Header = () => {
           <ListItem>
             <span className="list-content">USD</span> <DownIcon></DownIcon>
           </ListItem>
-          <ListItem>
-            <Link className="link-navigate" to="/login">
-              <span className="list-content">Login</span>
-              <LoginIcon></LoginIcon>
-            </Link>
-          </ListItem>
+
           <ListItem>
             <span className="list-content">Wishlist</span>
             <HeartIcon></HeartIcon>
+          </ListItem>
+          <ListItem>
+            {user ? (
+              <button
+                className="link-navigate"
+                onClick={() => logout(dispatch)}
+              >
+                <span className="list-content">Log out</span>
+                <LoginIcon></LoginIcon>
+              </button>
+            ) : (
+              <Link className="link-navigate" to="/login">
+                <span className="list-content">Login</span>
+                <LoginIcon></LoginIcon>
+              </Link>
+            )}
           </ListItem>
           <ListItem>
             <Link to="/cart">
