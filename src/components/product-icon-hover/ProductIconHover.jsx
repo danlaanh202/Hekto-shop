@@ -1,5 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import CartIcon from "../../icons/CartIcon";
 import HeartIcon from "../../icons/HeartIcon";
@@ -33,13 +34,14 @@ const ProductIconHover = ({
   isHorizontal = false,
   className,
   background = "",
-  productId,
-  price,
+  productId = "20",
+  price = 40,
 }) => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const addToCart = () => {
-    console.log("aaa");
-    dispatch(addProduct({ _id: 25, price: 20, amount: 1 }));
+    dispatch(addProduct({ _id: productId, price: price, amount: 1 }));
+    navigate("/cart");
   };
   return (
     <ProductIconHoverStyles
@@ -50,7 +52,10 @@ const ProductIconHover = ({
     >
       <CartIcon className="product-icon " onClick={addToCart}></CartIcon>
       <HeartIcon className="product-icon "></HeartIcon>
-      <SearchPlus className="product-icon "></SearchPlus>
+      <SearchPlus
+        onClick={() => navigate(`/products/${productId}`)}
+        className="product-icon "
+      ></SearchPlus>
     </ProductIconHoverStyles>
   );
 };

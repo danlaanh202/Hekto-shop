@@ -2,7 +2,11 @@ import React from "react";
 
 const CartIcon = ({ className, onClick }) => {
   return (
-    <div onClick={onClick} className={className}>
+    <div
+      style={{ display: "flex", alignItems: "center" }}
+      onClick={onClick}
+      className={className}
+    >
       <svg
         width="24"
         height="24"

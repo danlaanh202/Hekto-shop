@@ -71,7 +71,7 @@ const CartTotalStyles = styled.div`
     }
   }
 `;
-const CartTotal = () => {
+const CartTotal = ({ total }) => {
   const navigate = useNavigate();
   return (
     <CartTotalStyles className="cart-total-container">
@@ -79,12 +79,12 @@ const CartTotal = () => {
       <div className="cart-total-money">
         <div className="cart-total-money-item">
           <h4>Subtotals:</h4>
-          <span className="money">£219.00</span>
+          <span className="money">${total.toFixed(2)}</span>
         </div>
 
         <div className="cart-total-money-item">
           <h4>Totals:</h4>
-          <span className="money">£219.00</span>
+          <span className="money">${total.toFixed(2)}</span>
         </div>
         <div className="checkbox-container">
           <CustomCheckbox

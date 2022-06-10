@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
@@ -51,12 +51,52 @@ const ListItem = styled.span`
 
     font-weight: 600;
   }
+  .dropdown-container {
+    position: relative;
+    &-item {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .display-name {
+      cursor: pointer;
+    }
+    .dropdown-icon {
+      cursor: pointer;
+    }
+    .dropdown-list {
+      display: flex;
+      z-index: 1000;
+      flex-direction: column;
+      position: absolute;
+
+      list-style: none;
+      background: ${(props) => props.theme.purpleHeader};
+      top: calc(100% + 14px);
+      right: 0;
+      /* padding: 4px 20px; */
+      .dropdown-item {
+        cursor: pointer;
+        /* width: 100%; */
+        min-width: 140px;
+        text-align: center;
+        padding: 8px 0;
+        border-bottom: 1px solid white;
+        :hover {
+          background: #a15cfa;
+        }
+      }
+    }
+  }
 `;
 
 const Header = () => {
   const user = useSelector((state) => state.user.currentUser);
+  const [showDrop, setShowDrop] = useState(false);
   const dispatch = useDispatch();
-  console.log(user);
+  const getLastName = (arr) => {
+    return arr[arr.length - 1];
+  };
   return (
     <HeaderStyles>
       <div className="container">
@@ -85,13 +125,38 @@ const Header = () => {
           </ListItem>
           <ListItem>
             {user ? ( //if !user we show login
-              <button
-                className="link-navigate"
-                onClick={() => logout(dispatch)}
-              >
-                <span className="list-content">Logout</span>
-                <LoginIcon></LoginIcon>
-              </button>
+              <>
+                {/* <button
+                  className="link-navigate"
+                  onClick={() => logout(dispatch)}
+                >
+                  <span className="list-content">Logout</span>
+                  <LoginIcon></LoginIcon>
+                </button> */}
+                <div className="dropdown-container">
+                  <div
+                    className="dropdown-container-item"
+                    onClick={() => setShowDrop((prev) => !prev)}
+                  >
+                    <span className="display-name">
+                      {getLastName(user.displayName.split(" "))}
+                    </span>
+                    <DownIcon className="dropdown-icon" />
+                  </div>
+                  {showDrop && (
+                    <ul className="dropdown-list">
+                      <li className="dropdown-item">My Shop</li>
+                      <li className="dropdown-item">Settings</li>
+                      <li
+                        onClick={() => logout(dispatch)}
+                        className="dropdown-item"
+                      >
+                        Log out
+                      </li>
+                    </ul>
+                  )}
+                </div>
+              </>
             ) : (
               <Link className="link-navigate" to="/login">
                 <span className="list-content">Login</span>

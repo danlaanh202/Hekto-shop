@@ -1,6 +1,9 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { CartIconBig, HeartIconBig, SearchPlusBig } from "../../../../icons";
+import { addProduct } from "../../../../redux/cartRedux";
 
 const CartHeartZoomStyles = styled.div`
   display: flex;
@@ -15,11 +18,17 @@ const CartHeartZoomStyles = styled.div`
     cursor: pointer;
   }
 `;
-const CartHeartZoom = () => {
+const CartHeartZoom = ({ productId = "20", price = 20 }) => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const addToCart = () => {
+    dispatch(addProduct({ _id: productId, price: price, amount: 1 }));
+    navigate("/cart");
+  };
   return (
     <CartHeartZoomStyles>
       <span className="icon">
-        <CartIconBig />
+        <CartIconBig onClick={addToCart} />
       </span>
       <span className="icon">
         <HeartIconBig />

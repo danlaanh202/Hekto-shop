@@ -10,12 +10,9 @@ const ListViewStyles = styled.div`
 const ListView = ({ data }) => {
   return (
     <ListViewStyles className="container">
-      <ListShopItem></ListShopItem>
-      <ListShopItem></ListShopItem>
-      <ListShopItem></ListShopItem>
-      <ListShopItem></ListShopItem>
-      <ListShopItem></ListShopItem>
-      <ListShopItem></ListShopItem>
+      {data.map((item, index) => (
+        <ListShopItem key={item._id} data={data[index]}></ListShopItem>
+      ))}
     </ListViewStyles>
   );
 };

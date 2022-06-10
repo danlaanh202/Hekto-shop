@@ -1,8 +1,8 @@
 import React from "react";
 
-const SearchPlus = ({ className }) => {
+const SearchPlus = ({ className, onClick = () => {} }) => {
   return (
-    <div className={className}>
+    <div className={className} onClick={onClick}>
       <svg
         width="15"
         height="15"

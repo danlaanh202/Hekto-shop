@@ -25,5 +25,5 @@ export const theme = {
 
   grayBorder: "#e7e6ef",
 
-  shopItemBackground: "#ebf4f3",
+  shopItemBackground: "#F6F7FB",
 };

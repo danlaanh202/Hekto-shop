@@ -9,14 +9,13 @@ const GridViewStyles = styled.div`
   }
 `;
 const GridView = ({ data }) => {
+  console.log(data);
   return (
     <GridViewStyles>
       <div className="container">
-        <GridShopItem />
-        <GridShopItem />
-        <GridShopItem />
-        <GridShopItem />
-        <GridShopItem />
+        {data.map((item, index) => (
+          <GridShopItem key={item._id} data={data[index]} />
+        ))}
       </div>
     </GridViewStyles>
   );

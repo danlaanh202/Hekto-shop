@@ -7,9 +7,9 @@ const StarContainer = ({ star = 4 }) => {
     <div className="">
       {new Array(5).fill(0).map((item, index) => {
         return index <= star - 1 ? (
-          <StarIcon isGolden={true}></StarIcon>
+          <StarIcon key={"star" + index} isGolden={true}></StarIcon>
         ) : (
-          <StarIcon></StarIcon>
+          <StarIcon key={"star" + index}></StarIcon>
         );
       })}
     </div>

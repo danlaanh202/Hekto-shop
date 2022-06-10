@@ -2,7 +2,10 @@ import React from "react";
 
 const HeartIcon = ({ className }) => {
   return (
-    <div className={className}>
+    <div
+      style={{ display: "flex", alignItems: "center" }}
+      className={className}
+    >
       <svg
         width="16"
         height="16"

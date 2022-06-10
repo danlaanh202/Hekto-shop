@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import TextTruncate from "react-text-truncate";
 import styled from "styled-components";
 import { CloseIcon } from "../../../icons";
@@ -70,40 +71,51 @@ const CartItemStyles = styled.div`
     margin-bottom: auto;
   }
 `;
-const CartItem = () => {
+const CartItem = ({ productId, amount, price }) => {
+  const [cartItemData, setCartItemData] = useState({});
+  useEffect(() => {
+    const getItem = async () => {
+      try {
+        await axios
+          .get(
+            `${process.env.REACT_APP_API_URL}/product/get-product/${productId}`
+          )
+          .then((response) => setCartItemData(response.data));
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getItem();
+  }, []);
   return (
     <CartItemStyles className="cart-product-item cart-grid">
       <div className="product">
         <div className="img-container">
           <CloseIcon className="close-icon" />
-          <img
-            srcSet="/image/image-cart-1.png"
-            alt=""
-            className="product-img"
-          />
+          <img src={cartItemData.productImage} alt="" className="product-img" />
         </div>
         <div className="detail">
           <TextTruncate
-            line={1}
+            line={2}
             element="h4"
             className="title"
             truncateText="…"
-            text="Vel faucibus posuere"
+            text={cartItemData.productName}
           />
           <div className="detail-more">Color: Brown</div>
           <div className="detail-more">Size: XL</div>
         </div>
       </div>
       <div className="price">
-        <span className="text-base">$32.00</span>
+        <span className="text-base">${price.toFixed(2)}</span>
       </div>
       <div className="quantity">
         <button className="handle-quantity text-base">-</button>
-        <span className="quantity-number text-base">1</span>
+        <span className="quantity-number text-base">{amount}</span>
         <button className="handle-quantity text-base">+</button>
       </div>
       <div className="total-price">
-        <span className="text-base">£219.00</span>
+        <span className="text-base">${(price * amount).toFixed(2)}</span>
       </div>
     </CartItemStyles>
   );

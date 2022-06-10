@@ -26,6 +26,7 @@ const GridShopItemStyles = styled.div`
     cursor: pointer;
     overflow: hidden;
     :hover {
+      background: #ebf4f3;
       .product-image {
         transform: scale(0.9);
       }
@@ -79,21 +80,25 @@ const GridShopItemStyles = styled.div`
     }
   }
 `;
-const GridShopItem = () => {
+const GridShopItem = ({ data }) => {
   return (
     <GridShopItemStyles>
       <div className="product-image-container">
         <div className="product-image-container-icon transition-all">
-          <ProductIconHover background="white"></ProductIconHover>
+          <ProductIconHover
+            productId={data._id}
+            price={data.price}
+            background="white"
+          ></ProductIconHover>
         </div>
         <img
-          srcSet="/image/shop-page-item-1.png"
+          src={data.productImage}
           alt=""
           className="product-image transition-all"
         />
       </div>
       <div className="product-introduce">
-        <h4 className="product-introduce-title">Vel elit euismod</h4>
+        <h4 className="product-introduce-title">{data.productName}</h4>
         <div className="color-picker">
           {color.map((item) => (
             <span
@@ -104,8 +109,10 @@ const GridShopItem = () => {
           ))}
         </div>
         <div className="product-introduce-price">
-          <span className="current-price price">$26.00</span>
-          <span className="old-price price">$42.00</span>
+          <span className="current-price price">{data.price.toFixed(2)}</span>
+          <span className="old-price price">
+            {(data.price + 10).toFixed(2)}
+          </span>
         </div>
       </div>
     </GridShopItemStyles>

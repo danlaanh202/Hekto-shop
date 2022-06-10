@@ -4,8 +4,8 @@ import BannerTitle from "../components/banner-title/BannerTitle";
 import PrimaryButton from "../components/button/PrimaryButton";
 import CartItem from "../components/modules/cart/CartItem";
 import CartTotal from "../components/modules/cart/CartTotal";
-import CustomCheckbox from "../components/modules/listSearch/CustomCheckbox";
-import { CloseIcon } from "../icons";
+import { useDispatch, useSelector } from "react-redux";
+
 const ShoppingCartStyles = styled.div`
   .cart-grid {
     display: grid;
@@ -33,6 +33,8 @@ const ShoppingCartStyles = styled.div`
   }
 `;
 const ShoppingCart = () => {
+  const cartItems = useSelector((state) => state.cart);
+
   return (
     <ShoppingCartStyles>
       <BannerTitle title="Shoping Cart"></BannerTitle>
@@ -44,13 +46,17 @@ const ShoppingCart = () => {
             <h3 className="cart-heading-item">Quantity</h3>
             <h3 className="cart-heading-item">Total</h3>
           </div>
-          <CartItem />
-          <CartItem />
-          <CartItem />
-          <CartItem />
+          {cartItems.products.map((item, index) => (
+            <CartItem
+              productId={item._id}
+              amount={item.amount}
+              price={item.price}
+              key={item._id}
+            />
+          ))}
           <PrimaryButton className="clear-btn">Clear Cart</PrimaryButton>
         </div>
-        <CartTotal />
+        <CartTotal total={cartItems.total} />
       </div>
     </ShoppingCartStyles>
   );

@@ -5,6 +5,7 @@ import {
   InstagramIconShare,
   TwitterIconShare,
 } from "../../../icons";
+import PrimaryButton from "../../button/PrimaryButton";
 import StarContainer from "../../star/StarContainer";
 const PrimaryDetailStyles = styled.div`
   margin: 120px auto;
@@ -12,14 +13,25 @@ const PrimaryDetailStyles = styled.div`
   display: flex;
   .small-img-container {
     flex-direction: column;
+    width: 380px;
+    height: 490px;
     .small-img {
       display: block;
       object-fit: cover;
       margin: 13px;
+      height: 100%;
     }
   }
   .big-img-container {
+    width: 380px;
+    height: 490px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     .big-img {
+      object-fit: cover;
+      width: 75%;
       margin: 13px;
     }
   }
@@ -78,10 +90,15 @@ const PrimaryDetailStyles = styled.div`
     }
   }
 `;
-const PrimaryDetail = () => {
+const PrimaryDetail = ({
+  productImage = "",
+  productName = "",
+  price = 0,
+  description = "",
+}) => {
   return (
     <PrimaryDetailStyles className="container shadow-sm">
-      <div className="small-img-container">
+      {/* <div className="small-img-container">
         <img
           srcSet="/image/small-img-detail-1.png"
           alt=""
@@ -97,25 +114,25 @@ const PrimaryDetail = () => {
           alt=""
           className="small-img"
         />
-      </div>
+      </div> */}
       <div className="big-img-container">
-        <img srcSet="/image/big-img-detail.png" alt="" className="big-img" />
+        <img src={productImage} alt="" className="big-img" />
       </div>
       <div className="detail">
-        <h3 className="detail-title">Playwood Arm Chair</h3>
+        <h3 className="detail-title">{productName}</h3>
         <div className="star-container">
           <StarContainer />
           <span className="star-amount">(22)</span>
         </div>
         <div className="price-container">
-          <span className="current-price price">$26.00</span>
-          <span className="old-price price">$52.00</span>
+          <span className="current-price price">${price.toFixed(2)}</span>
+          <span className="old-price price">${(price + 10).toFixed(2)}</span>
         </div>
         <div className="description-container">
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris
-            tellus porttitor purus, et volutpat sit.
-          </p>
+          <p>{description}</p>
+        </div>
+        <div className="button-container">
+          <PrimaryButton>Add to cart</PrimaryButton>
         </div>
         <div className="more">
           <div className="more-item">
