@@ -1,5 +1,5 @@
 import React from "react";
-import PrimaryButton from "../button/PrimaryButton";
+import PrimaryButton from "../../../button/PrimaryButton";
 
 const BannerItem = () => {
   return (

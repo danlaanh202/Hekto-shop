@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
-import Tick from "../../icons/Tick";
-import PrimaryButton from "../button/PrimaryButton";
-import Title from "../title/Title";
+import Tick from "../../../../icons/Tick";
+import PrimaryButton from "../../../button/PrimaryButton";
+import Title from "../../../title/Title";
 
 const navItem = [
   {

@@ -1,9 +1,10 @@
+import axios from "axios";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import BannerTitle from "../components/banner-title/BannerTitle";
-import ImageUpload from "../components/image/ImageUpload";
+import ImageUpload from "../components/imageInput/ImageUpload";
 import CategoryDropdown from "../components/modules/add-product/CategoryDropdown";
 import useImageUpload from "../hooks/useImageUpload";
 const AddProductHideStyles = styled.div`
@@ -71,6 +72,11 @@ const AddProductHideStyles = styled.div`
       line-height: 20px;
       color: #ffffff;
       margin-top: 20px;
+      .spinner {
+        width: 20px;
+        height: 20px;
+        margin: auto;
+      }
     }
     .two-items {
       flex-direction: row;
@@ -109,11 +115,29 @@ const AddProductHide = () => {
     handleDeleteImage,
     previewSource,
   } = useImageUpload();
-  const onAddPostHandler = (data) => {
+  const uploadProduct = async (data) => {
+    try {
+      await axios
+        .post(`${process.env.REACT_APP_API_URL}/product/add-product`, data)
+        .then((response) => {
+          console.log(response);
+        });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  const onAddPostHandler = async (data) => {
     if (!isValid) {
       return;
     }
-    console.log(data);
+
+    setValue("seller", user._id);
+    await uploadImage().then((response) => {
+      console.log(response);
+      setValue("productImage", response);
+    });
+    await uploadProduct(getValues());
+    //image get from uploadImage function
   };
   return (
     <AddProductHideStyles>
@@ -181,7 +205,11 @@ const AddProductHide = () => {
             />
           </div>
           <button type="submit" className="submit-btn">
-            Add Product
+            {isSubmitting ? (
+              <div className="spinner animate-spin"></div>
+            ) : (
+              "Submit"
+            )}
           </button>
         </form>
       </div>

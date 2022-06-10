@@ -1,17 +1,35 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import Title from "../title/Title";
+
 import { SwiperSlide, Swiper } from "swiper/react";
+import { Pagination } from "swiper";
 import "swiper/css";
+import "swiper/css/pagination";
 
 import FeatureProduct from "./FeatureProduct";
+import Title from "../../../title/Title";
 const FeatureStyles = styled.div`
   width: 100%;
-
+  padding-bottom: 40px;
   .container {
     overflow: hidden;
-
-    .feature {
+    .swiper {
+      height: 440px;
+      .swiper-pagination {
+        bottom: 0;
+        &-bullet {
+          height: 4px;
+          width: 16px;
+          border-radius: 2px;
+        }
+        &-bullet-active {
+          transform: scaleX(1.5);
+          background: ${(props) => props.theme.carouselBackgroundActive};
+          margin: 0 6px;
+        }
+      }
+    }
+    /* .feature {
       width: 100%;
       display: flex;
       justify-content: space-between;
@@ -35,7 +53,7 @@ const FeatureStyles = styled.div`
         background: ${(props) => props.theme.carouselBackground};
         cursor: pointer;
       }
-    }
+    } */
   }
 `;
 
@@ -47,30 +65,38 @@ const Feature = () => {
       <div className="container">
         <Title center={true}>Featured Products</Title>
 
-        <Swiper className="feature" grabCursor={true} slidesPerView="4">
+        <Swiper
+          pagination={{
+            clickable: true,
+          }}
+          modules={[Pagination]}
+          className="feature mySwiper"
+          grabCursor={true}
+          slidesPerView={4}
+        >
           <SwiperSlide>
-            <FeatureProduct></FeatureProduct>
+            <FeatureProduct />
           </SwiperSlide>
           <SwiperSlide>
-            <FeatureProduct></FeatureProduct>
+            <FeatureProduct />
           </SwiperSlide>
           <SwiperSlide>
-            <FeatureProduct></FeatureProduct>
+            <FeatureProduct />
           </SwiperSlide>
           <SwiperSlide>
-            <FeatureProduct></FeatureProduct>
+            <FeatureProduct />
           </SwiperSlide>
           <SwiperSlide>
-            <FeatureProduct></FeatureProduct>
+            <FeatureProduct />
           </SwiperSlide>
           <SwiperSlide>
-            <FeatureProduct></FeatureProduct>
+            <FeatureProduct />
           </SwiperSlide>
           <SwiperSlide>
-            <FeatureProduct></FeatureProduct>
+            <FeatureProduct />
           </SwiperSlide>
         </Swiper>
-        <ul className="carousel">
+        {/* <ul className="carousel">
           {Array(4)
             .fill("")
             .map((item, index) => (
@@ -82,7 +108,7 @@ const Feature = () => {
                 }`}
               ></li>
             ))}
-        </ul>
+        </ul> */}
       </div>
     </FeatureStyles>
   );

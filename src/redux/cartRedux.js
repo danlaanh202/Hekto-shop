@@ -10,14 +10,16 @@ const cartSlice = createSlice({
     addProduct: (state, action) => {
       let isExisted = false;
       state.products.every((item, index) => {
-        if (item.id === action.payload._id) {
-          item.amount += 1; //if product is existed, plus 1
+        if (item._id === action.payload._id) {
+          item.amount += action.payload.amount; //if product is existed, plus 1
           isExisted = true;
+          state.total += action.payload.price * action.payload.amount;
           return false;
         }
         return true;
       });
       if (isExisted) return;
+
       state.products.push(action.payload); //payload contains an object with { productId: abcxyz, amount: 1, price: }
       state.total += action.payload.price * action.payload.amount;
     },

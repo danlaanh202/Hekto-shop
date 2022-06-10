@@ -1,4 +1,5 @@
 import React from "react";
+import TextTruncate from "react-text-truncate";
 import styled from "styled-components";
 import { CloseIcon } from "../../../icons";
 const CartItemStyles = styled.div`
@@ -82,7 +83,13 @@ const CartItem = () => {
           />
         </div>
         <div className="detail">
-          <h4 className="title">Vel faucibus posuere</h4>
+          <TextTruncate
+            line={1}
+            element="h4"
+            className="title"
+            truncateText="…"
+            text="Vel faucibus posuere"
+          />
           <div className="detail-more">Color: Brown</div>
           <div className="detail-more">Size: XL</div>
         </div>

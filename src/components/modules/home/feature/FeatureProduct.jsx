@@ -1,9 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import CartIcon from "../../icons/CartIcon";
-import HeartIcon from "../../icons/HeartIcon";
-import SearchPlus from "../../icons/SearchPlus";
-import ProductIconHover from "../product-icon-hover/ProductIconHover";
+import CartIcon from "../../../../icons/CartIcon";
+import HeartIcon from "../../../../icons/HeartIcon";
+import SearchPlus from "../../../../icons/SearchPlus";
+import ProductIconHover from "../../../product-icon-hover/ProductIconHover";
+import TextTruncate from "react-text-truncate";
+
 const FeatureProductStyles = styled.div`
   box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
   max-width: 270px;
@@ -74,6 +76,8 @@ const FeatureProductStyles = styled.div`
       }
     } */
     .feature-product-image {
+      width: 100%;
+
       padding: 46px 40px 12px 40px;
       object-fit: cover;
     }
@@ -91,6 +95,7 @@ const FeatureProductStyles = styled.div`
       font-size: 20px;
       line-height: 24px;
       color: ${(props) => props.theme.pinkSecondary};
+      display: block;
       text-align: center;
     }
     &-color {
@@ -142,7 +147,14 @@ const FeatureProduct = () => {
           </button>
         </div>
         <div className="feature-product-about transition-all">
-          <h3 className="feature-product-about-name">Cantilever chair</h3>
+          <TextTruncate
+            line={1}
+            element="h3"
+            className="feature-product-about-name"
+            truncateText="…"
+            text="Cantilever Chair aaaaaaaaa"
+          />
+          {/* <h3 className="feature-product-about-name">Cantilever chair</h3> */}
           <div className="feature-product-about-color">
             <span></span>
             <span></span>

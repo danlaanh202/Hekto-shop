@@ -84,12 +84,12 @@ const Header = () => {
             <HeartIcon></HeartIcon>
           </ListItem>
           <ListItem>
-            {user ? (
+            {user ? ( //if !user we show login
               <button
                 className="link-navigate"
                 onClick={() => logout(dispatch)}
               >
-                <span className="list-content">Log out</span>
+                <span className="list-content">Logout</span>
                 <LoginIcon></LoginIcon>
               </button>
             ) : (

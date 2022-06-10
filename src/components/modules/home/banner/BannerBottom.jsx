@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import PrimaryButton from "../button/PrimaryButton";
+import PrimaryButton from "../../../button/PrimaryButton";
 
 const BannerBottomStyles = styled.div`
   position: relative;
@@ -39,7 +39,7 @@ const BannerBottom = () => {
     <BannerBottomStyles>
       <div className="get-latest">
         <h3 className="get-latest-title">
-          Get Leatest Update By Subscribe 0ur Newslater
+          Get Latest Update By Subscribe 0ur Newslater
         </h3>
         <PrimaryButton>Shop Now</PrimaryButton>
       </div>

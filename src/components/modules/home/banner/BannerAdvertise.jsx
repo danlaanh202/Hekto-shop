@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import PrimaryButton from "../button/PrimaryButton";
+import PrimaryButton from "../../../button/PrimaryButton";
+
 const BannerAdvertiseStyles = styled.div`
   background: #f2f0ff;
   min-height: 580px;
@@ -76,7 +77,7 @@ const BannerAdvertise = () => {
         </div>
         <div className="banner-about">
           <h2 className="banner-about-title">
-            Unique Features Of leatest {"&"} Trending Poducts
+            Unique Features Of latest {"&"} Trending Poducts
           </h2>
           <List className="banner-about-description">
             <li id="li-1" className="banner-about-description-item">

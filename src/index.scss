@@ -67,3 +67,8 @@ button {
     transform: rotate(360deg);
   }
 }
+.spinner {
+  border-radius: 100rem;
+  border: 2px solid white;
+  border-right: 2px solid transparent;
+}

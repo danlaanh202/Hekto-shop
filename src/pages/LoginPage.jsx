@@ -160,9 +160,6 @@ const LoginPageStyles = styled.div`
         margin: auto;
         width: 20px;
         height: 20px;
-        border-radius: 100rem;
-        border: 2px solid white;
-        border-right: 2px solid transparent;
       }
     }
     .create-acc {

@@ -1,7 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import Title from "../title/Title";
+
+import Title from "../../../title/Title";
 import ShopexItem from "./ShopexItem";
+
 const ShopexOfferStyles = styled.div`
   .shopex-title {
     text-align: center;

@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { AuthorIcon, DateIcon } from "../../icons";
+import { AuthorIcon, DateIcon } from "../../../../icons";
+
 const LatestBlogItemStyles = styled.div`
   display: flex;
   flex-direction: column;

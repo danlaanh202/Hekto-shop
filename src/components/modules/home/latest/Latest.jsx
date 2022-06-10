@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import Title from "../title/Title";
+import Title from "../../../title/Title";
+
 import LatestProduct from "./LatestProduct";
 
 const latestTypes = [

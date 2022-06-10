@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import Title from "../title/Title";
+import Title from "../../../title/Title";
+
 import TopItem from "./TopItem";
 const TopCategoriesStyles = styled.div`
   margin-bottom: 50px;

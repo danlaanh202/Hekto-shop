@@ -1,8 +1,8 @@
 import React from "react";
 
-const CartIcon = ({ className }) => {
+const CartIcon = ({ className, onClick }) => {
   return (
-    <div className={className}>
+    <div onClick={onClick} className={className}>
       <svg
         width="24"
         height="24"
