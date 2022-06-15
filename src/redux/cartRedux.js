@@ -26,7 +26,7 @@ const cartSlice = createSlice({
     increaseAmount: (state, action) => {
       //payload has {productId: abcxyz, amount: x, price: 10k}
       state.products.every((item, index) => {
-        if (item.id === action.payload._id) {
+        if (item._id === action.payload._id) {
           item.amount += 1; //if product is existed, plus 1
           state.total += action.payload.price;
           return false;
@@ -37,7 +37,7 @@ const cartSlice = createSlice({
     decreaseAmount: (state, action) => {
       //payload has {productId: abcxyz, amount: x, price: 10k}
       state.products.every((item, index, currentArray) => {
-        if (item.id === action.payload._id) {
+        if (item._id === action.payload._id) {
           if (item.amount === 1) {
             currentArray.splice(index, 1); //remove item out of array products
           } else {
@@ -51,9 +51,9 @@ const cartSlice = createSlice({
     },
     removeProduct: (state, action) => {
       state.products.every((item, index, currentArray) => {
-        if (item.id === action.payload._id) {
+        if (item._id === action.payload._id) {
           state.total = state.total - item.amount * item.price;
-          currentArray.slice(index, 1); //remove item
+          currentArray.splice(index, 1); //remove item
           return false;
         }
         return true;

@@ -6,6 +6,7 @@ import CartIcon from "../../icons/CartIcon";
 import HeartIcon from "../../icons/HeartIcon";
 import SearchPlus from "../../icons/SearchPlus";
 import { addProduct } from "../../redux/cartRedux";
+import { mobile } from "../../responsive";
 const ProductIconHoverStyles = styled.div`
   display: flex;
   gap: 10px;
@@ -18,6 +19,10 @@ const ProductIconHoverStyles = styled.div`
     align-items: center;
     justify-content: center;
     border-radius: 50%;
+    ${mobile({
+      width: "15px",
+      height: "15px",
+    })}
 
     path {
       fill: #1389ff;

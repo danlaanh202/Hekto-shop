@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import Tick from "../../../../icons/Tick";
+import { mobile } from "../../../../responsive";
 import PrimaryButton from "../../../button/PrimaryButton";
 import Title from "../../../title/Title";
 
@@ -25,6 +26,9 @@ const DiscountItemStyles = styled.div`
       display: flex;
       justify-content: center;
       gap: 25px;
+      ${mobile({
+        gap: "40px",
+      })}
       &-item {
         font-family: "Lato";
         font-style: normal;
@@ -33,6 +37,9 @@ const DiscountItemStyles = styled.div`
         line-height: 22px;
         cursor: pointer;
         color: ${(props) => props.theme.purpleHeading};
+        ${mobile({
+          fontSize: "10px",
+        })}
       }
     }
     .active {
@@ -40,6 +47,9 @@ const DiscountItemStyles = styled.div`
       color: ${(props) => props.theme.pinkSecondary};
     }
     .nav-feature {
+      ${mobile({
+        display: "none",
+      })}
       display: flex;
       align-items: center;
       &-about {
@@ -101,6 +111,7 @@ const DiscountItem = () => {
         <div className="nav-discount">
           {navItem.map((item, index) => (
             <span
+              key={item.title}
               className={`nav-discount-item ${
                 navActive === item.id - 1 ? "active" : ""
               }`}

@@ -3,6 +3,12 @@ import axios from "axios";
 import TextTruncate from "react-text-truncate";
 import styled from "styled-components";
 import { CloseIcon } from "../../../icons";
+import {
+  decreaseAmount,
+  increaseAmount,
+  removeProduct,
+} from "../../../redux/cartRedux";
+import { useDispatch } from "react-redux";
 const CartItemStyles = styled.div`
   border-bottom: 1px solid #e1e1e4;
   padding: 12px 0;
@@ -71,8 +77,14 @@ const CartItemStyles = styled.div`
     margin-bottom: auto;
   }
 `;
-const CartItem = ({ productId, amount, price }) => {
+const CartItem = ({ productId = "", amount = 1, price = 0, dispatch }) => {
   const [cartItemData, setCartItemData] = useState({});
+
+  const handleQuantity = (type) => {
+    type === "inc"
+      ? dispatch(increaseAmount({ _id: productId, price: price }))
+      : dispatch(decreaseAmount({ _id: productId, price: price }));
+  };
   useEffect(() => {
     const getItem = async () => {
       try {
@@ -91,7 +103,10 @@ const CartItem = ({ productId, amount, price }) => {
     <CartItemStyles className="cart-product-item cart-grid">
       <div className="product">
         <div className="img-container">
-          <CloseIcon className="close-icon" />
+          <CloseIcon
+            onClick={() => dispatch(removeProduct({ _id: productId }))}
+            className="close-icon"
+          />
           <img src={cartItemData.productImage} alt="" className="product-img" />
         </div>
         <div className="detail">
@@ -110,9 +125,23 @@ const CartItem = ({ productId, amount, price }) => {
         <span className="text-base">${price.toFixed(2)}</span>
       </div>
       <div className="quantity">
-        <button className="handle-quantity text-base">-</button>
+        <button
+          onClick={() => {
+            handleQuantity("dec");
+          }}
+          className="handle-quantity text-base"
+        >
+          -
+        </button>
         <span className="quantity-number text-base">{amount}</span>
-        <button className="handle-quantity text-base">+</button>
+        <button
+          onClick={() => {
+            handleQuantity("inc");
+          }}
+          className="handle-quantity text-base"
+        >
+          +
+        </button>
       </div>
       <div className="total-price">
         <span className="text-base">${(price * amount).toFixed(2)}</span>

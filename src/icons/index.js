@@ -19,6 +19,8 @@ import AuthorIcon from "./AuthorIcon";
 import DateIcon from "./DateIcon";
 import PrevIcon from "./PrevIcon";
 import NextIcon from "./NextIcon";
+import MenuIcon from "./MenuIcon";
+import CloseIconNonCircle from "./CloseIconNonCircle";
 
 export {
   EmailIcon,
@@ -42,4 +44,6 @@ export {
   DateIcon,
   PrevIcon,
   NextIcon,
+  MenuIcon,
+  CloseIconNonCircle,
 };

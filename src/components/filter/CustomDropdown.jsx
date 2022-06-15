@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import DownIcon from "../../icons/DownIcon";
+import { mobile } from "../../responsive";
 
 const CustomDropdownStyles = styled.div`
   display: flex;
@@ -15,6 +16,9 @@ const CustomDropdownStyles = styled.div`
     padding: 5px;
     justify-content: space-between;
     cursor: pointer;
+    ${mobile({
+      width: "100%",
+    })}
     span {
       font-family: "Lato";
       font-style: normal;
@@ -22,10 +26,19 @@ const CustomDropdownStyles = styled.div`
       font-size: 12px;
       line-height: 1.5;
       color: ${(props) => props.theme.graySubText};
+      ${mobile({
+        fontSize: "8px",
+      })}
     }
   }
 `;
-
+const listSort = [
+  {
+    id: 1,
+    type: "des",
+  },
+  { id: 2, type: "inc" },
+];
 const CustomDropdown = () => {
   return (
     <CustomDropdownStyles>
@@ -33,6 +46,7 @@ const CustomDropdown = () => {
       <div className="dropdown">
         <span>Best match</span>
         <DownIcon stroke="#8A8FB9" />
+        <div className="dropdown-list"></div>
       </div>
     </CustomDropdownStyles>
   );

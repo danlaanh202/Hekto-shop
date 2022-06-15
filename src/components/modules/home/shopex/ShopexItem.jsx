@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { mobile } from "../../../../responsive";
 const ShopexItemStyles = styled.div`
   .shopex-item {
     max-width: 270px;
@@ -10,10 +11,24 @@ const ShopexItemStyles = styled.div`
     flex-direction: column;
     padding: 44px 24px;
     gap: 20px;
+    ${mobile({
+      maxWidth: "100%",
+      flexDirection: "row",
+      height: "80px",
+      padding: "20px 12px",
+    })}
+    &-logo {
+      ${mobile({
+        height: "100%",
+      })}
+    }
     &-title {
       font-size: 22px;
-      line-height: 26px;
+      line-height: 1.2;
       color: ${(props) => props.theme.purpleHeading};
+      ${mobile({
+        fontSize: "10px",
+      })}
     }
     &-description {
       font-family: "Lato";
@@ -24,6 +39,11 @@ const ShopexItemStyles = styled.div`
       /* or 160% */
       color: rgba(26, 11, 91, 0.3);
       text-align: center;
+      ${mobile({
+        fontSize: "8px",
+        textAlign: "left",
+        width: "200px",
+      })}
     }
   }
 `;

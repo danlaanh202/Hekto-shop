@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { mobile } from "../../../../responsive";
 import Title from "../../../title/Title";
 
 import LatestBlogItem from "./LatestBlogItem";
@@ -9,6 +10,10 @@ const LatestBlogStyles = styled.div`
     align-items: center;
     justify-content: center;
     gap: 56px;
+    ${mobile({
+      flexDirection: "column",
+      gap: "20px",
+    })}
   }
 `;
 

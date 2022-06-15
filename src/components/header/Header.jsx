@@ -2,6 +2,7 @@ import React, { Fragment, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { mobile } from "../../responsive";
 import {
   CartIcon,
   DownIcon,
@@ -11,23 +12,41 @@ import {
   PhoneIcon,
 } from "../../icons";
 import { logout } from "../../redux/apiCalls";
+import { useClickOutside } from "../../hooks/useClickOutside";
 const HeaderStyles = styled.div`
   width: 100%;
   background: ${(props) => props.theme.purpleHeader};
   padding: 12px;
+  ${mobile({
+    width: "100vw",
+  })}
   .container {
     display: flex;
     justify-content: space-between;
+    ${mobile({
+      flexDirection: "column",
+    })}
 
     .list {
       display: flex;
       align-items: center;
       gap: 20px;
+      ${mobile({
+        display: "none",
+      })}
       &-content {
         color: #f1f1f1;
         display: flex;
         align-items: center;
+        ${mobile({
+          fontSize: "12px",
+        })}
       }
+    }
+    .list-left {
+      ${mobile({
+        display: "flex",
+      })}
     }
   }
 `;
@@ -41,6 +60,12 @@ const ListItem = styled.span`
   .link-navigate {
     display: flex;
     gap: 4px;
+  }
+  .cart {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: white;
   }
   button {
     font-family: "Josefin Sans", sans-serif;
@@ -92,7 +117,12 @@ const ListItem = styled.span`
 
 const Header = () => {
   const user = useSelector((state) => state.user.currentUser);
-  const [showDrop, setShowDrop] = useState(false);
+
+  const {
+    show: showDrop,
+    setShow: setShowDrop,
+    nodeRef: showRef,
+  } = useClickOutside();
   const dispatch = useDispatch();
   const getLastName = (arr) => {
     return arr[arr.length - 1];
@@ -100,7 +130,7 @@ const Header = () => {
   return (
     <HeaderStyles>
       <div className="container">
-        <div className="list">
+        <div className="list list-left">
           <ListItem>
             <EmailIcon></EmailIcon>
             <span className="list-content">mushroomlazy259@gmail.com</span>
@@ -111,17 +141,23 @@ const Header = () => {
           </ListItem>
         </div>
         <div className="list">
-          <ListItem>
+          {/* <ListItem>
             <span className="list-content">English</span>
             <DownIcon></DownIcon>
           </ListItem>
           <ListItem>
             <span className="list-content">USD</span> <DownIcon></DownIcon>
-          </ListItem>
+          </ListItem> */}
 
           <ListItem>
             <span className="list-content">Wishlist</span>
             <HeartIcon></HeartIcon>
+          </ListItem>
+          <ListItem>
+            <Link className="cart" to="/cart">
+              <span>Cart</span>
+              <CartIcon></CartIcon>
+            </Link>
           </ListItem>
           <ListItem>
             {user ? ( //if !user we show login
@@ -133,13 +169,13 @@ const Header = () => {
                   <span className="list-content">Logout</span>
                   <LoginIcon></LoginIcon>
                 </button> */}
-                <div className="dropdown-container">
+                <div className="dropdown-container" ref={showRef}>
                   <div
                     className="dropdown-container-item"
                     onClick={() => setShowDrop((prev) => !prev)}
                   >
                     <span className="display-name">
-                      {getLastName(user.displayName.split(" "))}
+                      {user.displayName &&  getLastName(user.displayName?.split(" ")) || "Dan"}
                     </span>
                     <DownIcon className="dropdown-icon" />
                   </div>
@@ -163,11 +199,6 @@ const Header = () => {
                 <LoginIcon></LoginIcon>
               </Link>
             )}
-          </ListItem>
-          <ListItem>
-            <Link to="/cart">
-              <CartIcon></CartIcon>
-            </Link>
           </ListItem>
         </div>
       </div>

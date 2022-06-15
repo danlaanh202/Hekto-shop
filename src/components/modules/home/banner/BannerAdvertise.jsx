@@ -1,11 +1,15 @@
 import React from "react";
 import styled from "styled-components";
+import { mobile } from "../../../../responsive";
 import PrimaryButton from "../../../button/PrimaryButton";
 
 const BannerAdvertiseStyles = styled.div`
   background: #f2f0ff;
   min-height: 580px;
   margin-top: 100px;
+  ${mobile({
+    display: "none",
+  })}
   .banner {
     max-width: 1050px;
     display: flex;

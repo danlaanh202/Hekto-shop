@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { mobile } from "../../../../responsive";
 import BannerItem from "./BannerItem";
 const BannerStyles = styled.div`
   width: 100%;
@@ -8,6 +9,9 @@ const BannerStyles = styled.div`
   position: relative;
   display: flex;
   align-items: center;
+  ${mobile({
+    display: "none",
+  })}
   .container {
     display: flex;
     justify-content: flex-start;
@@ -29,6 +33,14 @@ const BannerStyles = styled.div`
     transform: translateX(-50%);
   }
   .banner-img {
+    ${mobile({
+      position: "absolute",
+      left: "50%",
+      transform: "translateX(-50%)",
+    })}
+    img {
+      object-fit: cover;
+    }
   }
   .banner-container {
     min-width: 650px;
@@ -71,12 +83,13 @@ const SwitchItem = styled.div`
 const Banner = () => {
   return (
     <BannerStyles>
+      {/* <div className="gray-backgroud"></div> */}
       <BannerItem></BannerItem>
-      <div className="switch">
+      {/* <div className="switch">
         <SwitchItem active={true} id={1}></SwitchItem>
         <SwitchItem id={2}></SwitchItem>
         <SwitchItem id={3}></SwitchItem>
-      </div>
+      </div> */}
     </BannerStyles>
   );
 };

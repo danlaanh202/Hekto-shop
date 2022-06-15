@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { mobile } from "../../../../responsive";
 import PrimaryButton from "../../../button/PrimaryButton";
 
 const BannerBottomStyles = styled.div`
@@ -10,6 +11,9 @@ const BannerBottomStyles = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  ${mobile({
+    display: "none",
+  })}
   .background-banner {
     position: absolute;
     /* inset: 0; */

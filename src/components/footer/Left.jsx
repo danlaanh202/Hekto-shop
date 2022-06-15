@@ -1,9 +1,16 @@
 import React from "react";
 import styled from "styled-components";
+import { mobile } from "../../responsive";
 import PrimaryButton from "../button/PrimaryButton";
 
 const LeftStyles = styled.div`
   .left {
+    ${mobile({
+      display: "flex",
+      flexDirection: "column-reverse",
+      alignItems: "center",
+      margin: "0 12px",
+    })}
     .contact {
     }
     .address {
@@ -13,6 +20,9 @@ const LeftStyles = styled.div`
       font-family: "Josefin Sans";
       font-size: 38px;
       line-height: 45px;
+      ${mobile({
+        textAlign: "center",
+      })}
     }
     .input-container {
       position: relative;
@@ -56,10 +66,12 @@ const Left = () => {
           <input type="text" placeholder="Enter Email Address" />
           <PrimaryButton className="input-signup">Sign Up</PrimaryButton>
         </div>
-        <span className="gray-text contact">Contact Info</span>
-        <p className="gray-text address">
-          17 Princess Road, London, Greater London NW1 8JR, UK
-        </p>
+        <div>
+          <span className="gray-text contact">Contact Info</span>
+          <p className="gray-text address">
+            17 Princess Road, London, Greater London NW1 8JR, UK
+          </p>
+        </div>
       </div>
     </LeftStyles>
   );

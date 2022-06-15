@@ -52,7 +52,7 @@ const SidebarFilter = ({
         <div className="product-type-items">
           {isRating
             ? new Array(5).fill(0).map((item, index) => (
-                <div className="item-container">
+                <div className="item-container" key={index + "abcxyz"}>
                   <CustomCheckbox
                     background={background}
                     backgroundCheck={backgroundCheck}
@@ -63,7 +63,7 @@ const SidebarFilter = ({
                 </div>
               ))
             : new Array(5).fill(0).map((item, index) => (
-                <div className="item-container">
+                <div className="item-container" key={index + "asdasdad"}>
                   <CustomCheckbox
                     background={background}
                     backgroundCheck={backgroundCheck}

@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { mobile } from "../../../../responsive";
 
 import Title from "../../../title/Title";
 import ShopexItem from "./ShopexItem";
@@ -12,6 +13,9 @@ const ShopexOfferStyles = styled.div`
   .shopex {
     display: flex;
     justify-content: space-between;
+    ${mobile({
+      flexDirection: "column",
+    })}
   }
 `;
 

@@ -27,7 +27,7 @@ const RelatedItem = () => {
   return (
     <RelatedItemStyles>
       <div className="img-container">
-        <img srcSet="image/related-img-1.png" alt="" className="" />
+        <img srcSet="/image/related-img-1.png" alt="" className="" />
       </div>
       <div className="product">
         <h5 className="product-name purple-heading">Mens Fashion Wear</h5>

@@ -18,11 +18,11 @@ const PrimaryButtonStyles = styled.button`
   max-width: 165px;
   cursor: pointer;
 `;
-const PrimaryButton = ({ children, className, to }) => {
+const PrimaryButton = ({ children, className, to, onClick = () => {} }) => {
   const navigate = useNavigate();
   return (
     <PrimaryButtonStyles
-      onClick={() => to && navigate(to)}
+      onClick={() => (to ? navigate(to) : onClick())}
       className={className}
     >
       {children}

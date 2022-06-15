@@ -56,7 +56,7 @@ const ListShopItemStyles = styled.div`
     }
   }
 `;
-const ListShopItem = ({ data }) => {
+const ListShopItem = ({ data = {} }) => {
   const [star, setStar] = useState(3);
   console.log(data);
   return (
@@ -65,21 +65,21 @@ const ListShopItem = ({ data }) => {
         <img src={data.productImage} alt="" />
       </div>
       <div className="product-introduce">
-        <h4 className="product-introduce-title">{data.productName}</h4>
+        <h4 className="product-introduce-title">{data?.productName}</h4>
         <div className="product-introduce-price-container">
-          <span className="current-price price">${data.price.toFixed(2)}</span>
+          <span className="current-price price">${data?.price.toFixed(2)}</span>
           <span className="old-price price">
-            ${(data.price + 10).toFixed(2)}
+            ${(data?.price + 10).toFixed(2)}
           </span>
           <div className="star-container">
             <StarContainer />
           </div>
         </div>
-        <p className="product-introduce-description">{data.description}</p>
+        <p className="product-introduce-description">{data?.description}</p>
         <div className="product-introduce-cart">
           <CartHeartZoom
-            productId={data.productId}
-            price={data.price}
+            productId={data?.productId}
+            price={data?.price}
           ></CartHeartZoom>
         </div>
       </div>

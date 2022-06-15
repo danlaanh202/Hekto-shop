@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { mobile } from "../../../../responsive";
 import ProductIconHover from "../../../product-icon-hover/ProductIconHover";
 const color = [
   {
@@ -25,6 +26,14 @@ const GridShopItemStyles = styled.div`
     justify-content: center;
     cursor: pointer;
     overflow: hidden;
+    ${mobile({
+      height: "150px",
+    })}
+    .product-image {
+      ${mobile({
+        height: "80%",
+      })}
+    }
     :hover {
       background: #ebf4f3;
       .product-image {
@@ -39,6 +48,9 @@ const GridShopItemStyles = styled.div`
       left: 12px;
       bottom: 24px;
       opacity: 0;
+      ${mobile({
+        opacity: "1",
+      })}
     }
   }
   .product-introduce {
@@ -48,8 +60,11 @@ const GridShopItemStyles = styled.div`
     margin-top: 20px;
     &-title {
       font-size: 18px;
-      line-height: 21px;
+      line-height: 1.2;
       color: ${(props) => props.theme.purpleHeading};
+      ${mobile({
+        fontSize: "12px",
+      })}
     }
     .color-picker {
       display: flex;
@@ -67,8 +82,11 @@ const GridShopItemStyles = styled.div`
     .product-introduce-price {
       .price {
         font-size: 14px;
-        line-height: 16px;
+        line-height: 1.1;
         margin: 0 8px;
+        ${mobile({
+          fontSize: "10px",
+        })}
       }
       .current-price {
         color: ${(props) => props.theme.purpleHeading};

@@ -1,15 +1,23 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import styled from "styled-components";
+import styled, { withTheme } from "styled-components";
 import { AuthorIcon, DateIcon } from "../../../../icons";
+import { mobile } from "../../../../responsive";
 
 const LatestBlogItemStyles = styled.div`
   display: flex;
   flex-direction: column;
+  position: relative;
   .img-container {
   }
   .latest-blog-content {
-    /* align-items: center; */
+    ${mobile({
+      position: "absolute",
+      inset: 0,
+      background: "rgba(0, 0, 0, 0.6)",
+      justifyContent: "center",
+      alignItems: "center",
+    })}
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -32,9 +40,12 @@ const LatestBlogItemStyles = styled.div`
             font-style: normal;
             font-weight: 600;
             font-size: 14px;
-            line-height: 16px;
+            line-height: 1.1;
 
             color: #151875;
+            ${mobile({
+              color: "white",
+            })}
           }
         }
       }
@@ -42,25 +53,28 @@ const LatestBlogItemStyles = styled.div`
     .content-container {
       display: flex;
       flex-direction: column;
-
       gap: 12px;
       .title {
         font-size: 18px;
-        line-height: 21px;
+        line-height: 1.2;
 
         /* Text */
 
         color: #151875;
+        ${mobile({
+          color: "white",
+        })}
       }
       .description {
         font-family: "Lato";
         font-style: normal;
         font-weight: 400;
         font-size: 16px;
-        line-height: 30px;
-        /* or 188% */
-
+        line-height: 1.88;
         color: #72718f;
+        ${mobile({
+          display: "none",
+        })}
       }
     }
     .read-more {
@@ -68,14 +82,19 @@ const LatestBlogItemStyles = styled.div`
       font-style: normal;
       font-weight: 400;
       font-size: 16px;
-      line-height: 30px;
-      /* identical to box height, or 188% */
+      line-height: 1.88;
 
       text-decoration-line: underline;
 
       /* Text */
 
       color: #151875;
+      ${mobile({
+        border: "1px solid white",
+        color: "white",
+        textDecoration: "none",
+        padding: "2px 10px",
+      })}
     }
   }
 `;

@@ -9,7 +9,6 @@ const ShopPage = ({ title = "" }) => {
   const [view, setView] = useState(0); // 0 is grid, 1 is list view
   const [data, setData] = useState([]);
   useEffect(() => {
-    console.log("use effect");
     const getData = async () => {
       try {
         await axios

@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { mobile } from "../../../../responsive";
 const TopItemStyles = styled.div`
   :hover {
     .top-image {
@@ -9,13 +10,26 @@ const TopItemStyles = styled.div`
     }
   }
   .top-image {
-    min-width: 250px;
+    width: 250px;
     height: 250px;
-    border-radius: 100%;
+    border-radius: 20px;
+    margin: 0 auto;
     display: flex;
     align-items: center;
     justify-content: center;
     background: ${(props) => props.theme.grayBackGroundLighter};
+    ${mobile({
+      width: "140px",
+      height: "140px",
+    })}
+    img {
+      ${mobile({
+        height: "70%",
+        width: "70%",
+        marginLeft: "auto",
+        marginRight: "auto",
+      })}
+    }
   }
   .top-about {
     color: ${(props) => props.theme.purpleHeading};
@@ -26,13 +40,19 @@ const TopItemStyles = styled.div`
     margin-top: 24px;
     &-name {
       font-size: 20px;
-      line-height: 23px;
+      line-height: 1.2;
       text-align: center;
       cursor: pointer;
+      ${mobile({
+        fontSize: "16px",
+      })}
     }
     &-price {
       font-size: 16px;
-      line-height: 19px;
+      line-height: 1.2;
+      ${mobile({
+        fontSize: "10px",
+      })}
     }
   }
 `;

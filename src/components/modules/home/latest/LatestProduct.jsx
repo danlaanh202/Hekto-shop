@@ -1,5 +1,7 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { mobile } from "../../../../responsive";
 import ProductIconHover from "../../../product-icon-hover/ProductIconHover";
 
 const LatestProductStyles = styled.div`
@@ -7,7 +9,9 @@ const LatestProductStyles = styled.div`
   margin-bottom: 30px;
   .latest-product {
     max-width: 360px;
-
+    ${mobile({
+      maxWidth: "152px",
+    })}
     &-image {
       display: flex;
       align-items: center;
@@ -16,6 +20,17 @@ const LatestProductStyles = styled.div`
       background: ${(props) => props.theme.latestItemBackground};
       position: relative;
       cursor: pointer;
+      width: 360px;
+      height: 270px;
+      ${mobile({
+        padding: "10px 10px 10px 10px",
+      })}
+      &-item {
+        ${mobile({
+          width: "80%",
+          height: "80%",
+        })}
+      }
       .latest-products-icon {
         cursor: pointer;
         display: flex;
@@ -26,6 +41,13 @@ const LatestProductStyles = styled.div`
         bottom: 40px;
         flex-direction: column;
         display: none;
+
+        ${mobile({
+          left: "5px",
+          width: "15px",
+          display: "block",
+          bottom: "15px",
+        })}
         .latest-product-icon {
           width: 100%;
           height: 30px;
@@ -44,13 +66,18 @@ const LatestProductStyles = styled.div`
       display: flex;
       justify-content: space-between;
       padding: 12px 8px;
-
+      ${mobile({
+        flexDirection: "column",
+      })}
       &-title {
         font-family: "Josefin Sans";
         font-size: 16px;
         line-height: 19px;
         color: ${(props) => props.theme.purpleHeading};
         cursor: pointer;
+        ${mobile({
+          fontSize: "10px",
+        })}
       }
       &-price {
         &-normal {
@@ -60,12 +87,18 @@ const LatestProductStyles = styled.div`
           line-height: 14px;
           text-decoration-line: line-through;
           color: ${(props) => props.theme.latestNormalPrice};
+          ${mobile({
+            fontSize: "10px",
+          })}
         }
         &-sale {
           font-family: "Josefin Sans";
           font-size: 14px;
           line-height: 16px;
           color: ${(props) => props.theme.purpleHeading};
+          ${mobile({
+            fontSize: "10px",
+          })}
         }
       }
     }
@@ -101,7 +134,7 @@ const IsSaleImage = styled.img`
   left: 18px;
   display: none;
 `;
-const LatestProduct = ({ isSale }) => {
+const LatestProduct = ({ isSale, data }) => {
   return (
     <LatestProductStyles>
       <div className="latest-product">
@@ -120,17 +153,22 @@ const LatestProduct = ({ isSale }) => {
             <ProductIconHover isHorizontal={false} className="icon-container" />
           </div>
           <img
-            srcSet="/image/latest-product-mock.png"
+            src={data.productImage}
             alt=""
             className="latest-product-image-item transition-all"
           />
         </div>
         <div className="latest-product-about">
-          <span className="latest-product-about-title">
-            Comfort Handy Craft
-          </span>
+          <Link
+            to={`/products/${data._id}`}
+            className="latest-product-about-title"
+          >
+            {data.productName}
+          </Link>
           <div className="latest-product-about-price">
-            <span className="latest-product-about-price-sale">$42.00</span>
+            <span className="latest-product-about-price-sale">
+              ${data.price.toFixed(2)}
+            </span>
             <span className="latest-product-about-price-normal">$65.00</span>
           </div>
         </div>

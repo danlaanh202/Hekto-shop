@@ -5,6 +5,8 @@ import HeartIcon from "../../../../icons/HeartIcon";
 import SearchPlus from "../../../../icons/SearchPlus";
 import ProductIconHover from "../../../product-icon-hover/ProductIconHover";
 import TextTruncate from "react-text-truncate";
+import { mobile } from "../../../../responsive";
+import { Link } from "react-router-dom";
 
 const FeatureProductStyles = styled.div`
   box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
@@ -97,6 +99,9 @@ const FeatureProductStyles = styled.div`
       color: ${(props) => props.theme.pinkSecondary};
       display: block;
       text-align: center;
+      ${mobile({
+        fontSize: "16px",
+      })}
     }
     &-color {
       display: flex;
@@ -116,6 +121,9 @@ const FeatureProductStyles = styled.div`
       line-height: 16px;
       text-align: center;
       color: ${(props) => props.theme.purpleHeading};
+      ${mobile({
+        fontSize: "12px",
+      })}
     }
     &-price {
       font-family: "Lato";
@@ -125,26 +133,36 @@ const FeatureProductStyles = styled.div`
       line-height: 17px;
       text-align: center;
       color: ${(props) => props.theme.purpleHeading};
+      ${mobile({
+        fontSize: "12px",
+      })}
     }
   }
 `;
 
-const FeatureProduct = () => {
+const FeatureProduct = ({ data = {} }) => {
   return (
     <>
       <FeatureProductStyles>
         <div className="feature-product-image-container">
           <div className="feature-product-icon transition-all">
-            <ProductIconHover isHorizontal={true} className="icon-container" />
+            <ProductIconHover
+              productId={data._id}
+              isHorizontal={true}
+              className="icon-container"
+            />
           </div>
           <img
-            srcSet="/image/chair-1.png"
+            src={data.productImage}
             alt=""
             className="feature-product-image transition-all"
           />
-          <button className="feature-product-detail transition-all">
+          <Link
+            to={`/products/${data._id}`}
+            className="feature-product-detail transition-all"
+          >
             View Details
-          </button>
+          </Link>
         </div>
         <div className="feature-product-about transition-all">
           <TextTruncate
@@ -152,16 +170,17 @@ const FeatureProduct = () => {
             element="h3"
             className="feature-product-about-name"
             truncateText="…"
-            text="Cantilever Chair aaaaaaaaa"
+            text={data.productName}
           />
-          {/* <h3 className="feature-product-about-name">Cantilever chair</h3> */}
           <div className="feature-product-about-color">
             <span></span>
             <span></span>
             <span></span>
           </div>
           <span className="feature-product-about-code">Code - Y523201</span>
-          <span className="feature-product-about-price">$42.00</span>
+          <span className="feature-product-about-price">
+            ${data.price.toFixed(2)}
+          </span>
         </div>
       </FeatureProductStyles>
     </>

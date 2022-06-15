@@ -1,19 +1,29 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { mobile } from "../../responsive";
 const BannerTitleStyles = styled.div`
   background: ${(props) => props.theme.bannnerTitleBackground};
   height: 286px;
+  ${mobile({
+    height: "150px",
+  })}
   .container {
     height: 100%;
     display: flex;
     /* align-items: center; */
     justify-content: center;
     flex-direction: column;
+    ${mobile({
+      marginLeft: "20px",
+    })}
     .title {
       font-size: 36px;
-      line-height: 42px;
+      line-height: 1.2;
       color: #101750;
+      ${mobile({
+        fontSize: "20px",
+      })}
     }
     .path {
       &-to {
@@ -21,7 +31,10 @@ const BannerTitleStyles = styled.div`
         font-style: normal;
         font-weight: 500;
         font-size: 16px;
-        line-height: 19px;
+        line-height: 1.2;
+        ${mobile({
+          fontSize: "12px",
+        })}
       }
       .active {
         color: ${(props) => props.theme.pinkSecondary};

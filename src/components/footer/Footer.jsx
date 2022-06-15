@@ -4,6 +4,7 @@ import Categories from "./Categories";
 import CustomerCare from "./CustomerCare";
 import Left from "./Left";
 import Pages from "./Pages";
+import { isMobile } from "react-device-detect";
 
 const FooterStyles = styled.div`
   margin-top: 100px;
@@ -30,9 +31,13 @@ const Footer = () => {
     <FooterStyles>
       <div className="container">
         <Left></Left>
-        <Categories></Categories>
-        <CustomerCare></CustomerCare>
-        <Pages></Pages>
+        {!isMobile && (
+          <>
+            <Categories></Categories>
+            <CustomerCare></CustomerCare>
+            <Pages></Pages>
+          </>
+        )}
       </div>
     </FooterStyles>
   );
