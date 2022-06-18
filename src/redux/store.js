@@ -2,6 +2,7 @@ import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import userReducer from "./userRedux";
 import cartReducer from "./cartRedux";
 import searchReducer from "./searchRedux";
+import wishlistReducer from "./wishlistRedux";
 import {
   persistStore,
   persistReducer,
@@ -22,6 +23,7 @@ const rootReducer = combineReducers({
   user: userReducer,
   cart: cartReducer,
   search: searchReducer,
+  wishlist: wishlistReducer,
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 

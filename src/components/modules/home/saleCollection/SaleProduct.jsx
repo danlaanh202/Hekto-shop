@@ -7,7 +7,10 @@ const SaleProductStyles = styled.div`
   background: #fff6fb;
   padding: 25px;
   position: relative;
+  
   ${mobile({
+    width: "95%",
+    margin: "0 auto",
     height: "200px",
   })}
   .sale-product-title {

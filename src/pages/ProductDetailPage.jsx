@@ -32,7 +32,7 @@ const ProductDetailPage = () => {
     };
     getItem(productId);
     console.log(detailProduct);
-  }, []);
+  }, [productId]);
 
   return (
     <ProductDetailPageStyles>

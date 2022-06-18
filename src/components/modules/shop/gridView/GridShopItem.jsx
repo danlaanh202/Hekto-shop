@@ -1,5 +1,7 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+
 import { mobile } from "../../../../responsive";
 import ProductIconHover from "../../../product-icon-hover/ProductIconHover";
 const color = [
@@ -99,6 +101,7 @@ const GridShopItemStyles = styled.div`
   }
 `;
 const GridShopItem = ({ data }) => {
+  const navigate = useNavigate();
   return (
     <GridShopItemStyles>
       <div className="product-image-container">
@@ -110,6 +113,7 @@ const GridShopItem = ({ data }) => {
           ></ProductIconHover>
         </div>
         <img
+          onClick={() => navigate(`/products/${data._id}`)}
           src={data.productImage}
           alt=""
           className="product-image transition-all"

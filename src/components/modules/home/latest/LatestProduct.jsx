@@ -24,6 +24,8 @@ const LatestProductStyles = styled.div`
       height: 270px;
       ${mobile({
         padding: "10px 10px 10px 10px",
+        width: "160px",
+        height: "150px",
       })}
       &-item {
         ${mobile({
@@ -76,7 +78,7 @@ const LatestProductStyles = styled.div`
         color: ${(props) => props.theme.purpleHeading};
         cursor: pointer;
         ${mobile({
-          fontSize: "10px",
+          fontSize: "14px",
         })}
       }
       &-price {
@@ -88,7 +90,7 @@ const LatestProductStyles = styled.div`
           text-decoration-line: line-through;
           color: ${(props) => props.theme.latestNormalPrice};
           ${mobile({
-            fontSize: "10px",
+            fontSize: "12px",
           })}
         }
         &-sale {

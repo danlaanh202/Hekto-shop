@@ -102,6 +102,7 @@ const Latest = () => {
         <div className="latest-types">
           {latestTypes.map((item, index) => (
             <span
+            key={item.query}
               onClick={() => {
                 //setQuery = something to call api
                 setTypeId(index + 1);
@@ -114,7 +115,7 @@ const Latest = () => {
         </div>
         <div className="latest-products">
           {data?.length > 0 &&
-            data.map((item, index) => <LatestProduct data={item} />)}
+            data.map((item, index) => <LatestProduct key={item._id} data={item} />)}
         </div>
       </div>
     </LatestStyles>

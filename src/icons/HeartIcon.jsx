@@ -1,8 +1,9 @@
 import React from "react";
 
-const HeartIcon = ({ className }) => {
+const HeartIcon = ({ className, onClick = () => {} }) => {
   return (
     <div
+      onClick={onClick}
       style={{ display: "flex", alignItems: "center" }}
       className={className}
     >

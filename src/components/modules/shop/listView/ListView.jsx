@@ -5,12 +5,21 @@ const ListViewStyles = styled.div`
   display: flex;
   gap: 30px;
   flex-direction: column;
+  .spinner {
+      margin-left: auto;
+      margin-right: auto;
+      width: 100px;
+      height: 100px;
+      border: 3px solid black;
+      border-right: 3px solid transparent;
+    }
 `;
 
-const ListView = ({ data }) => {
+const ListView = ({ data, loading }) => {
   return (
     <ListViewStyles className="container">
-      {data.map((item, index) => (
+       {loading && <div className="spinner animate-spin"></div> }
+      {!loading &&  data.map((item, index) => (
         <ListShopItem key={item._id} data={data[index]}></ListShopItem>
       ))}
     </ListViewStyles>

@@ -5,35 +5,58 @@ import FilterCat from "../components/filter/FilterCat";
 import LeftSidebar from "../components/modules/listSearch/LeftSidebar";
 import ListShopItem from "../components/modules/shop/listView/ListShopItem";
 import axios from "axios";
-import { useSelector } from "react-redux";
+
 const SearchListPageStyles = styled.div`
   .content-container {
     display: flex;
+
+    .list-items {
+      width: 100%;
+      .spinner {
+        margin-top: 100px;
+        margin-left: auto;
+        margin-right: auto;
+        width: 100px;
+        height: 100px;
+        border:2px solid ${props => props.theme.pinkSecondary};;
+        border-right: 2px solid transparent;
+      }
+    }
   }
 `;
 const SearchListPage = () => {
   const [searchData, setSearchData] = useState([]);
-  const searchQ = useSelector((state) => state.search.searchQuery);
+  const [loading, setLoading] = useState(false)
+  const [searchInput, setSearchInput] = useState("")
+
   useEffect(() => {
     const getSearchData = async () => {
-      await axios
+      try {
+        await axios
         .get(
-          `${process.env.REACT_APP_API_URL}/search/get-search-products?search=${searchQ}`
+          `${process.env.REACT_APP_API_URL}/search/get-search-products?search=${searchInput}`
         )
         .then((response) => {
           setSearchData(response.data);
         });
+      }catch(err) {
+        console.log(err)
+      }
+      finally{
+        setLoading(false)
+      }
     };
     getSearchData();
-  }, [searchQ]);
+  }, [searchInput]);
   return (
     <SearchListPageStyles>
       <BannerTitle title="Search query" />
-      <FilterCat showViewSelect={false} />
+      <FilterCat showViewSelect={false} setLoading={setLoading} setSearchInput={setSearchInput} />
       <div className="content-container container">
         <LeftSidebar />
         <div className="list-items">
-          {searchData &&
+          {!loading && <div className="spinner animate-spin"></div> }
+          {loading && searchData &&
             searchData?.length > 0 &&
             searchData.map((item, index) => (
               <ListShopItem key={item._id} data={item} />

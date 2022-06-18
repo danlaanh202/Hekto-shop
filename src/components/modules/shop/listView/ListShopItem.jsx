@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import StarContainer from "../../../star/StarContainer";
+import WishlistButtonContainer from "../../wishlist/WishlistButtonContainer";
 import CartHeartZoom from "./CartHeartZoom";
 const ListShopItemStyles = styled.div`
   display: flex;
@@ -56,9 +57,9 @@ const ListShopItemStyles = styled.div`
     }
   }
 `;
-const ListShopItem = ({ data = {} }) => {
+const ListShopItem = ({ data = {}, isWishlist = false }) => {
   const [star, setStar] = useState(3);
-  console.log(data);
+
   return (
     <ListShopItemStyles>
       <div className="product-image-container">
@@ -67,7 +68,9 @@ const ListShopItem = ({ data = {} }) => {
       <div className="product-introduce">
         <h4 className="product-introduce-title">{data?.productName}</h4>
         <div className="product-introduce-price-container">
-          <span className="current-price price">${data?.price.toFixed(2)}</span>
+          <span className="current-price price">
+            ${data?.price?.toFixed(2)}
+          </span>
           <span className="old-price price">
             ${(data?.price + 10).toFixed(2)}
           </span>
@@ -77,10 +80,14 @@ const ListShopItem = ({ data = {} }) => {
         </div>
         <p className="product-introduce-description">{data?.description}</p>
         <div className="product-introduce-cart">
-          <CartHeartZoom
-            productId={data?.productId}
-            price={data?.price}
-          ></CartHeartZoom>
+          {isWishlist ? (
+            <WishlistButtonContainer data={data} />
+          ) : (
+            <CartHeartZoom
+              productId={data?.productId}
+              price={data?.price}
+            ></CartHeartZoom>
+          )}
         </div>
       </div>
     </ListShopItemStyles>

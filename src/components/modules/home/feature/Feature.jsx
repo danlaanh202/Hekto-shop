@@ -35,36 +35,10 @@ const FeatureStyles = styled.div`
         }
       }
     }
-    /* .feature {
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      gap: 40px;
-    }
-    .carousel {
-      margin: 52px;
-      display: flex;
-      gap: 6px;
-      justify-content: center;
-      .active {
-        transform: scaleX(1.5);
-        background: ${(props) => props.theme.carouselBackgroundActive};
-        margin: 0 6px;
-      }
-      &-number {
-        cursor: number;
-        display: block;
-        height: 4px;
-        width: 16px;
-        background: ${(props) => props.theme.carouselBackground};
-        cursor: pointer;
-      }
-    } */
   }
 `;
 
 const Feature = () => {
-  const [carouselNumber, setCarouselNumber] = useState(0);
   const [featureData, setFeatureData] = useState([]);
   useEffect(() => {
     const getData = async () => {

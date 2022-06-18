@@ -1,13 +1,15 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+
 import styled from "styled-components";
-import DebounceFunction from "../../debounce/debounceFunction";
-import debounceFunction from "../../debounce/debounceFunction";
+
+
 import ListView from "../../icons/ListView";
 import SolidView from "../../icons/SolidView";
-import { searchInputChange } from "../../redux/searchRedux";
+
 import { mobile } from "../../responsive";
 import CustomDropdown from "./CustomDropdown";
+import debounce from 'lodash.debounce';
+import { useCallback } from "react";
 
 const FilterCatStyles = styled.div`
   margin: 124px 0;
@@ -98,13 +100,12 @@ const FilterCatStyles = styled.div`
   }
 `;
 
-const FilterCat = ({ setView, view, showViewSelect = true }) => {
-  const dispatch = useDispatch();
- 
-
+const FilterCat = ({ setView, view, showViewSelect = true, setSearchInput =() => {}, setLoading=() => {} }) => {
   const handleChangeInput = (e) => {
-    dispatch(searchInputChange({ query: e.target.value }));
+    setSearchInput(e.target.value)
+
   };
+  const debounceChange = useCallback(debounce(handleChangeInput, 500),[])
   return (
     <FilterCatStyles>
       <div className="container">
@@ -134,7 +135,10 @@ const FilterCat = ({ setView, view, showViewSelect = true }) => {
           )}
 
           <input
-            onChange={(e) => {DebounceFunction(handleChangeInput, 2000)}}
+            onChange={(e) => {
+              setLoading(true)
+              debounceChange(e)
+            }}
             type="text"
             className="search-input"
           />

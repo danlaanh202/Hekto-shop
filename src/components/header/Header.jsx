@@ -117,7 +117,7 @@ const ListItem = styled.span`
 
 const Header = () => {
   const user = useSelector((state) => state.user.currentUser);
-
+  const cartNumber = useSelector((state) => state.cart.products);
   const {
     show: showDrop,
     setShow: setShowDrop,
@@ -150,13 +150,15 @@ const Header = () => {
           </ListItem> */}
 
           <ListItem>
-            <span className="list-content">Wishlist</span>
-            <HeartIcon></HeartIcon>
+            <Link to="/wishlist" className="cart">
+              <span className="list-content">Wishlist</span>
+              <HeartIcon></HeartIcon>
+            </Link>
           </ListItem>
           <ListItem>
             <Link className="cart" to="/cart">
               <span>Cart</span>
-              <CartIcon></CartIcon>
+              <CartIcon number={cartNumber?.length}></CartIcon>
             </Link>
           </ListItem>
           <ListItem>
@@ -175,7 +177,9 @@ const Header = () => {
                     onClick={() => setShowDrop((prev) => !prev)}
                   >
                     <span className="display-name">
-                      {user.displayName &&  getLastName(user.displayName?.split(" ")) || "Dan"}
+                      {(user.displayName &&
+                        getLastName(user.displayName?.split(" "))) ||
+                        "Dan"}
                     </span>
                     <DownIcon className="dropdown-icon" />
                   </div>

@@ -6,6 +6,7 @@ import CartIcon from "../../icons/CartIcon";
 import HeartIcon from "../../icons/HeartIcon";
 import SearchPlus from "../../icons/SearchPlus";
 import { addProduct } from "../../redux/cartRedux";
+import { addWishlist } from "../../redux/wishlistRedux";
 import { mobile } from "../../responsive";
 const ProductIconHoverStyles = styled.div`
   display: flex;
@@ -48,6 +49,10 @@ const ProductIconHover = ({
     dispatch(addProduct({ _id: productId, price: price, amount: 1 }));
     navigate("/cart");
   };
+  const addToWishlist = () => {
+    dispatch(addWishlist({ _id: productId }));
+    navigate("/wishlist");
+  };
   return (
     <ProductIconHoverStyles
       background={background}
@@ -56,7 +61,7 @@ const ProductIconHover = ({
       }
     >
       <CartIcon className="product-icon " onClick={addToCart}></CartIcon>
-      <HeartIcon className="product-icon "></HeartIcon>
+      <HeartIcon className="product-icon" onClick={addToWishlist}></HeartIcon>
       <SearchPlus
         onClick={() => navigate(`/products/${productId}`)}
         className="product-icon "

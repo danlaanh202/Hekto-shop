@@ -6,24 +6,34 @@ const GridViewStyles = styled.div`
   ${mobile({
     margin: "0 8px",
   })}
+  .spinner {
+      margin-left: auto;
+      margin-right: auto;
+      width: 100px;
+      height: 100px;
+      border: 3px solid black;
+      border-right: 3px solid transparent;
+    }
   .container {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 52px;
+    
     ${mobile({
       gridTemplateColumns: "repeat(2, minmax(0,1fr))",
       gap: "12px",
     })}
   }
 `;
-const GridView = ({ data }) => {
+const GridView = ({ data, loading }) => {
   return (
     <GridViewStyles>
       <div className="container">
-        {data.map((item, index) => (
+        {!loading && data.map((item, index) => (
           <GridShopItem key={item._id} data={data[index]} />
-        ))}
+          ))}
       </div>
+      {loading && <div className="spinner animate-spin"></div> }
     </GridViewStyles>
   );
 };

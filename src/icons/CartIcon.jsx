@@ -1,11 +1,35 @@
 import React from "react";
+import styled from "styled-components";
+const CartIconStyles = styled.div`
+  position: relative;
+  display: flex;
+  align-items: center;
+  &:before {
+    content: attr(data-number);
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 14px;
+    height: 14px;
+    background: white;
+    border-radius: 40%;
+    transform: translate(-50%,50%);
+    color: ${props => props.theme.purpleHeading};;
+    font-size: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+  }
+  
+`
+const CartIcon = ({ className, onClick, number }) => {
 
-const CartIcon = ({ className, onClick }) => {
   return (
-    <div
-      style={{ display: "flex", alignItems: "center" }}
+    <CartIconStyles
       onClick={onClick}
       className={className}
+      data-number={"" || number?.toString()}
     >
       <svg
         width="24"
@@ -27,7 +51,7 @@ const CartIcon = ({ className, onClick }) => {
           fill="white"
         />
       </svg>
-    </div>
+    </CartIconStyles>
   );
 };
 

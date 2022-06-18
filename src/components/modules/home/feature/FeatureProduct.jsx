@@ -6,7 +6,7 @@ import SearchPlus from "../../../../icons/SearchPlus";
 import ProductIconHover from "../../../product-icon-hover/ProductIconHover";
 import TextTruncate from "react-text-truncate";
 import { mobile } from "../../../../responsive";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const FeatureProductStyles = styled.div`
   box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
@@ -141,6 +141,7 @@ const FeatureProductStyles = styled.div`
 `;
 
 const FeatureProduct = ({ data = {} }) => {
+  const navigate = useNavigate();
   return (
     <>
       <FeatureProductStyles>
@@ -155,7 +156,8 @@ const FeatureProduct = ({ data = {} }) => {
           <img
             src={data.productImage}
             alt=""
-            className="feature-product-image transition-all"
+            className="feature-product-image transition-all cursor-pointer"
+            onClick={() => navigate(`/products/${data._id}`)}
           />
           <Link
             to={`/products/${data._id}`}
