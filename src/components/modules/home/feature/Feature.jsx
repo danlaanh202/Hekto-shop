@@ -8,7 +8,6 @@ import "swiper/css/pagination";
 
 import FeatureProduct from "./FeatureProduct";
 import Title from "../../../title/Title";
-import { isMobile } from "react-device-detect";
 import { mobile } from "../../../../responsive";
 import axios from "axios";
 const FeatureStyles = styled.div`

@@ -5,7 +5,7 @@ import SidebarFilter from "./SidebarFilter";
 const LeftSidebarStyles = styled.div`
   width: 200px;
 `;
-const LeftSidebar = () => {
+const LeftSidebar = ({ categories = [] }) => {
   return (
     <LeftSidebarStyles>
       <SidebarFilter type="Product Brands"></SidebarFilter>
@@ -30,6 +30,7 @@ const LeftSidebar = () => {
         checkColor="#FFDBF1"
         backgroundCheck="#FF3EB2"
         background="#FFDBF1"
+        categories={categories}
       ></SidebarFilter>
     </LeftSidebarStyles>
   );

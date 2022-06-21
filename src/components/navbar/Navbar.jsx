@@ -13,6 +13,8 @@ import { useClickOutside } from "../../hooks/useClickOutside";
 
 const NavbarStyles = styled.div`
   width: 100%;
+  background: white;
+
   /* overflow: hidden; */
   .container {
     padding: 20px 5px;
@@ -93,7 +95,7 @@ const NavbarStyles = styled.div`
         right: 0;
         left: 0;
         top: 100%;
-        
+
         &-item {
           height: 90px;
           display: flex;
@@ -170,7 +172,7 @@ const Navbar = () => {
   const [searchInput, setSearchInput] = useState("");
   const [loading, setLoading] = useState(false);
   const { show, setShow, nodeRef } = useClickOutside();
-const navigate = useNavigate()
+  const navigate = useNavigate();
   const handleChangeInput = (e) => {
     setSearchInput(e.target.value);
   };
@@ -178,13 +180,15 @@ const navigate = useNavigate()
   useEffect(() => {
     const getData = async () => {
       try {
-        searchInput ? await axios
-        .get(
-          `${process.env.REACT_APP_API_URL}/search/get-search-products?search=${searchInput}&limit=4`
-        )
-        .then((response) => {
-          setSearchData(response.data);
-        }): setSearchData([])
+        searchInput
+          ? await axios
+              .get(
+                `${process.env.REACT_APP_API_URL}/search/get-search-products?search=${searchInput}&limit=4`
+              )
+              .then((response) => {
+                setSearchData(response.data);
+              })
+          : setSearchData([]);
       } catch (err) {
         console.log(err);
       } finally {
@@ -197,7 +201,7 @@ const navigate = useNavigate()
 
   return (
     <>
-      <NavbarStyles>
+      <NavbarStyles className="shadow-sm">
         <div className="container">
           <Link to="/" className="logo">
             Hekto
@@ -223,34 +227,42 @@ const navigate = useNavigate()
             <button className="">
               <SearchIcon></SearchIcon>
             </button>
-            {show && <div className="nav-search-drop">
-              {loading && (
-                <div className="nav-search-drop-item">
-                  <div className="spinner animate-spin"></div>
-                </div>
-              )}
-              {
-                !loading &&
-                searchData &&
-                searchData.map((item, index) => (
-                  <div key={item._id}  className="nav-search-drop-item cursor-pointer" onClick={() => {setShow(false); navigate(`/products/${item._id}`)} }>
-                    <div className="img-container">
-                      <img src={item.productImage} alt="" />
-                    </div>
-                    <div className="content-container">
-                      <div className="content-title">{item.productName}</div>
-                      <div className="content-price">
-                        ${item.price.toFixed(2)}
+            {show && (
+              <div className="nav-search-drop">
+                {loading && (
+                  <div className="nav-search-drop-item">
+                    <div className="spinner animate-spin"></div>
+                  </div>
+                )}
+                {!loading &&
+                  searchData &&
+                  searchData.map((item, index) => (
+                    <div
+                      key={item._id}
+                      className="nav-search-drop-item cursor-pointer"
+                      onClick={() => {
+                        setShow(false);
+                        navigate(`/products/${item._id}`);
+                      }}
+                    >
+                      <div className="img-container">
+                        <img src={item.productImage} alt="" />
+                      </div>
+                      <div className="content-container">
+                        <div className="content-title">{item.productName}</div>
+                        <div className="content-price">
+                          ${item.price.toFixed(2)}
+                        </div>
                       </div>
                     </div>
+                  ))}
+                {!loading && searchData?.length === 0 && (
+                  <div className="nav-search-drop-item">
+                    <div className="nothing">Nothing show</div>
                   </div>
-                ))}
-              {!loading && searchData?.length === 0 && (
-                <div className="nav-search-drop-item">
-                  <div className="nothing">Nothing show</div>
-                </div>
-              )}
-            </div>}
+                )}
+              </div>
+            )}
           </div>
           <div className="menu-icon">
             <MenuIcon onClick={() => setShowMenu(true)} />

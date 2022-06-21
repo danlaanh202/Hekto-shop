@@ -24,25 +24,19 @@ const ProductDetailPage = () => {
           )
           .then((response) => {
             setDetailProduct(response.data);
-            console.log(productId);
+            console.log(response.data);
           });
       } catch (err) {
         console.log(err);
       }
     };
     getItem(productId);
-    console.log(detailProduct);
   }, [productId]);
 
   return (
     <ProductDetailPageStyles>
       <BannerTitle title="Product Details" />
-      <PrimaryDetail
-        productName={detailProduct?.productName}
-        productImage={detailProduct?.productImage}
-        price={detailProduct?.price}
-        description={detailProduct?.description}
-      />
+      <PrimaryDetail data={detailProduct} />
       <AdditionalDetail />
       <RelatedProducts />
       <Sponsor className="sponsor-container" />

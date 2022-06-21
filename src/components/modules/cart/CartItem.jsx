@@ -2,13 +2,14 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import TextTruncate from "react-text-truncate";
 import styled from "styled-components";
-import { CloseIcon } from "../../../icons";
+import { toast } from "react-toastify";
 import {
   decreaseAmount,
   increaseAmount,
   removeProduct,
 } from "../../../redux/cartRedux";
-import { useDispatch } from "react-redux";
+import CloseIcon from "../../../icons/CloseIcon";
+
 const CartItemStyles = styled.div`
   border-bottom: 1px solid #e1e1e4;
   padding: 12px 0;
@@ -79,7 +80,7 @@ const CartItemStyles = styled.div`
 `;
 const CartItem = ({ productId = "", amount = 1, price = 0, dispatch }) => {
   const [cartItemData, setCartItemData] = useState({});
-
+  const notify = (content) => toast(content);
   const handleQuantity = (type) => {
     type === "inc"
       ? dispatch(increaseAmount({ _id: productId, price: price }))
@@ -104,10 +105,17 @@ const CartItem = ({ productId = "", amount = 1, price = 0, dispatch }) => {
       <div className="product">
         <div className="img-container">
           <CloseIcon
-            onClick={() => dispatch(removeProduct({ _id: productId }))}
+            onClick={() => {
+              dispatch(removeProduct({ _id: productId }));
+              notify("Product has been removed");
+            }}
             className="close-icon"
           />
-          <img src={cartItemData.productImage} alt="" className="product-img" />
+          <img
+            src={cartItemData?.productImage}
+            alt=""
+            className="product-img"
+          />
         </div>
         <div className="detail">
           <TextTruncate
@@ -115,7 +123,7 @@ const CartItem = ({ productId = "", amount = 1, price = 0, dispatch }) => {
             element="h4"
             className="title"
             truncateText="…"
-            text={cartItemData.productName}
+            text={cartItemData?.productName}
           />
           <div className="detail-more">Color: Brown</div>
           <div className="detail-more">Size: XL</div>

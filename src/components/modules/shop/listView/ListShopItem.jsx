@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import TextTruncate from "react-text-truncate";
 import styled from "styled-components";
 import StarContainer from "../../../star/StarContainer";
 import WishlistButtonContainer from "../../wishlist/WishlistButtonContainer";
@@ -78,7 +79,14 @@ const ListShopItem = ({ data = {}, isWishlist = false }) => {
             <StarContainer />
           </div>
         </div>
-        <p className="product-introduce-description">{data?.description}</p>
+        <TextTruncate
+          line={1}
+          element="p"
+          className="product-introduce-description"
+          truncateText="…"
+          text={data?.description}
+        />
+        {/* <p className="product-introduce-description">{data?.description}</p> */}
         <div className="product-introduce-cart">
           {isWishlist ? (
             <WishlistButtonContainer data={data} />

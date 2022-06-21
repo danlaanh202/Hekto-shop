@@ -1,10 +1,14 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import {
   FacebookIconShare,
   InstagramIconShare,
   TwitterIconShare,
 } from "../../../icons";
+import { addProduct } from "../../../redux/cartRedux";
+import { addWishlist, removeFromWishlist } from "../../../redux/wishlistRedux";
+import { notify } from "../../../utils/notify";
 import PrimaryButton from "../../button/PrimaryButton";
 import StarContainer from "../../star/StarContainer";
 const PrimaryDetailStyles = styled.div`
@@ -70,6 +74,10 @@ const PrimaryDetailStyles = styled.div`
         color: #a9acc6;
       }
     }
+    .button-container {
+      display: flex;
+      gap: 20px;
+    }
     .more {
       &-item {
         display: flex;
@@ -90,12 +98,9 @@ const PrimaryDetailStyles = styled.div`
     }
   }
 `;
-const PrimaryDetail = ({
-  productImage = "",
-  productName = "",
-  price = 0,
-  description = "",
-}) => {
+const PrimaryDetail = ({ data = {} }) => {
+  const dispatch = useDispatch();
+
   return (
     <PrimaryDetailStyles className="container shadow-sm">
       {/* <div className="small-img-container">
@@ -116,28 +121,49 @@ const PrimaryDetail = ({
         />
       </div> */}
       <div className="big-img-container">
-        <img src={productImage} alt="" className="big-img" />
+        <img src={data?.productImage} alt="" className="big-img" />
       </div>
       <div className="detail">
-        <h3 className="detail-title">{productName}</h3>
+        <h3 className="detail-title">{data?.productName}</h3>
         <div className="star-container">
           <StarContainer />
           <span className="star-amount">(22)</span>
         </div>
         <div className="price-container">
-          <span className="current-price price">${price.toFixed(2)}</span>
-          <span className="old-price price">${(price + 10).toFixed(2)}</span>
+          <span className="current-price price">
+            ${data?.price?.toFixed(2)}
+          </span>
+          <span className="old-price price">
+            ${(data?.price + 10).toFixed(2)}
+          </span>
         </div>
         <div className="description-container">
-          <p>{description}</p>
+          <p>{data?.description}</p>
         </div>
         <div className="button-container">
-          <PrimaryButton>Add to cart</PrimaryButton>
+          <PrimaryButton
+            onClick={() => {
+              dispatch(
+                addProduct({ _id: data?._id, price: data?.price, amount: 1 })
+              );
+              notify("This product has been added to cart");
+            }}
+          >
+            Add to cart
+          </PrimaryButton>
+          <PrimaryButton
+            onClick={() => {
+              dispatch(addWishlist({ _id: data?._id }));
+              notify("This product has been added to wishlist");
+            }}
+          >
+            Add to wishlist
+          </PrimaryButton>
         </div>
         <div className="more">
           <div className="more-item">
             <span className="more-name">Categories: </span>
-            <span className="more-list">Bag</span>
+            <span className="more-list">{data?.categories?.category}</span>
           </div>
           <div className="more-item">
             <span className="more-name">Tags: </span>

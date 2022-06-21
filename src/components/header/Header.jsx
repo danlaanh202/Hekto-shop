@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
@@ -13,10 +13,12 @@ import {
 } from "../../icons";
 import { logout } from "../../redux/apiCalls";
 import { useClickOutside } from "../../hooks/useClickOutside";
+import { useEffect } from "react";
 const HeaderStyles = styled.div`
   width: 100%;
   background: ${(props) => props.theme.purpleHeader};
   padding: 12px;
+  top: 0;
   ${mobile({
     width: "100vw",
   })}
@@ -124,9 +126,11 @@ const Header = () => {
     nodeRef: showRef,
   } = useClickOutside();
   const dispatch = useDispatch();
+
   const getLastName = (arr) => {
     return arr[arr.length - 1];
   };
+
   return (
     <HeaderStyles>
       <div className="container">

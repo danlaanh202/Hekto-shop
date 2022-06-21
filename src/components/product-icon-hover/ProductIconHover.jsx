@@ -8,6 +8,7 @@ import SearchPlus from "../../icons/SearchPlus";
 import { addProduct } from "../../redux/cartRedux";
 import { addWishlist } from "../../redux/wishlistRedux";
 import { mobile } from "../../responsive";
+import { ToastContainer, toast } from "react-toastify";
 const ProductIconHoverStyles = styled.div`
   display: flex;
   gap: 10px;
@@ -43,15 +44,16 @@ const ProductIconHover = ({
   productId = "20",
   price = 40,
 }) => {
+  const notify = (content) => toast(content);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const addToCart = () => {
     dispatch(addProduct({ _id: productId, price: price, amount: 1 }));
-    navigate("/cart");
+    notify("Product is added to cart");
   };
   const addToWishlist = () => {
     dispatch(addWishlist({ _id: productId }));
-    navigate("/wishlist");
+    notify("Product is added to wishlist");
   };
   return (
     <ProductIconHoverStyles

@@ -7,6 +7,9 @@ const OptionDiv = styled.div`
   align-items: center;
   padding: 16px 20px;
   cursor: pointer;
+  :hover {
+    background-color: rgb(243 244 246);
+  }
 `;
 const Option = ({ onClick, ...props }) => {
   const { setShow } = useDropdown();
@@ -15,7 +18,7 @@ const Option = ({ onClick, ...props }) => {
     setShow(false);
   };
   return (
-    <OptionDiv className=" hover:bg-gray-100" onClick={handleClick}>
+    <OptionDiv className="option-div" onClick={handleClick}>
       {props.children}
     </OptionDiv>
   );

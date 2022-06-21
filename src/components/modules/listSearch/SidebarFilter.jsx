@@ -42,6 +42,7 @@ const SidebarFilter = ({
   unCheckColor = "#603EFF",
   isRating = false,
   isUnique = false,
+  categories = [],
 }) => {
   return (
     <SidebarFilterStyles>

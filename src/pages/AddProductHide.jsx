@@ -7,6 +7,17 @@ import BannerTitle from "../components/banner-title/BannerTitle";
 import ImageUpload from "../components/imageInput/ImageUpload";
 import CategoryDropdown from "../components/modules/add-product/CategoryDropdown";
 import useImageUpload from "../hooks/useImageUpload";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useEffect } from "react";
+import { notify } from "../utils/notify";
+import BrandDropDown from "../components/modules/add-product/BrandDropdown";
+
+const schema = yup.object({
+  productName: yup.string().required("Product Name is required"),
+  brand: yup.string().required("Brand is required"),
+  price: yup.number("Price must be number value").required("Price is required"),
+});
 const AddProductHideStyles = styled.div`
   form {
     margin-top: 80px;
@@ -90,11 +101,13 @@ const AddProductHideStyles = styled.div`
     }
   }
 `;
+
 const AddProductHide = () => {
   const user = useSelector((state) => state.user.currentUser);
-
   const [categories, setCategories] = useState([]); //List categories from API
-  const [selectCategories, setSelectCategories] = useState([]); //change when clicked on dropdown
+  const [brands, setBrands] = useState([]);
+  const [selectCategories, setSelectCategories] = useState(""); //change when clicked on dropdown
+  const [selectBrands, setSelectBrands] = useState(""); //change when clicked on dropdown
   const {
     control,
     register,
@@ -107,6 +120,7 @@ const AddProductHide = () => {
   } = useForm({
     mode: "onChange",
     defaultValues: {},
+    resolver: yupResolver(schema),
   });
   const {
     handleFileInputChange,
@@ -120,7 +134,7 @@ const AddProductHide = () => {
       await axios
         .post(`${process.env.REACT_APP_API_URL}/product/add-product`, data)
         .then((response) => {
-          console.log(response);
+          notify("Product has been created");
         });
     } catch (err) {
       console.log(err);
@@ -128,17 +142,41 @@ const AddProductHide = () => {
   };
   const onAddPostHandler = async (data) => {
     if (!isValid) {
+      console.log(data);
       return;
     }
-
     setValue("seller", user._id);
-    await uploadImage().then((response) => {
-      console.log(response);
-      setValue("productImage", response);
-    });
-    await uploadProduct(getValues());
+    await uploadImage()
+      .then((response) => {
+        setValue("productImage", response);
+      })
+      .then(() => {
+        uploadProduct(getValues());
+      });
+
     //image get from uploadImage function
   };
+  useEffect(() => {
+    const getThings = () => {
+      axios
+        .all([
+          axios.get(`${process.env.REACT_APP_API_URL}/category/get-categories`),
+          axios.get(`${process.env.REACT_APP_API_URL}/brand/get-brands`),
+        ])
+        .then(
+          axios.spread((...responses) => {
+            console.log(responses[0]);
+            setCategories(responses[0].data);
+            setBrands(responses[1].data);
+          })
+        )
+        .catch((errs) => {
+          console.log(errs);
+        });
+    };
+
+    getThings();
+  }, []);
   return (
     <AddProductHideStyles>
       <BannerTitle title="Add Product" />
@@ -155,15 +193,12 @@ const AddProductHide = () => {
                 placeholder="Enter product name"
               />
             </div>
-
             <div className="two-items-item">
-              <label htmlFor="brand">Brand</label>
-              <input
-                {...register("brand")}
-                className="product-input"
-                id="brand"
-                name="brand"
-                placeholder="Enter Brand"
+              <BrandDropDown
+                selectBrands={selectBrands}
+                setValue={setValue}
+                brands={brands}
+                setSelectBrands={setSelectBrands}
               />
             </div>
           </div>
@@ -178,10 +213,14 @@ const AddProductHide = () => {
                 placeholder="Enter Price ($)"
               />
             </div>
-            <div className=" two-items-item">
+            <div className="two-items-item">
               <CategoryDropdown
+                label="Category"
+                selectCategories={selectCategories}
                 setValue={setValue}
+                categories={categories}
                 setSelectCategories={setSelectCategories}
+                val="category"
               />
             </div>
           </div>

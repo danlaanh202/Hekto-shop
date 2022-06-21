@@ -18,7 +18,7 @@ const SearchListPageStyles = styled.div`
         margin-right: auto;
         width: 100px;
         height: 100px;
-        border:2px solid ${props => props.theme.pinkSecondary};;
+        border: 2px solid ${(props) => props.theme.pinkSecondary};
         border-right: 2px solid transparent;
       }
     }
@@ -26,37 +26,57 @@ const SearchListPageStyles = styled.div`
 `;
 const SearchListPage = () => {
   const [searchData, setSearchData] = useState([]);
-  const [loading, setLoading] = useState(false)
-  const [searchInput, setSearchInput] = useState("")
-
+  const [loading, setLoading] = useState(false);
+  const [searchInput, setSearchInput] = useState("");
+  const [categories, setCategories] = useState([]);
   useEffect(() => {
     const getSearchData = async () => {
       try {
         await axios
-        .get(
-          `${process.env.REACT_APP_API_URL}/search/get-search-products?search=${searchInput}`
-        )
-        .then((response) => {
-          setSearchData(response.data);
-        });
-      }catch(err) {
-        console.log(err)
-      }
-      finally{
-        setLoading(false)
+          .get(
+            searchInput
+              ? `${process.env.REACT_APP_API_URL}/search/get-search-products?search=${searchInput}`
+              : `${process.env.REACT_APP_API_URL}/product/get-product`
+          )
+          .then((response) => {
+            setSearchData(response.data);
+          });
+      } catch (err) {
+        console.log(err);
+      } finally {
+        setLoading(false);
       }
     };
     getSearchData();
   }, [searchInput]);
+  useEffect(() => {
+    const getCategories = async () => {
+      try {
+        axios
+          .get(`${process.env.REACT_APP_API_URL}/category/get-categories`)
+          .then((response) => {
+            setCategories(response.data);
+          });
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getCategories();
+  }, []);
   return (
     <SearchListPageStyles>
       <BannerTitle title="Search query" />
-      <FilterCat showViewSelect={false} setLoading={setLoading} setSearchInput={setSearchInput} />
+      <FilterCat
+        showViewSelect={false}
+        setLoading={setLoading}
+        setSearchInput={setSearchInput}
+      />
       <div className="content-container container">
-        <LeftSidebar />
+        <LeftSidebar categories={categories} />
         <div className="list-items">
-          {!loading && <div className="spinner animate-spin"></div> }
-          {loading && searchData &&
+          {loading && <div className="spinner animate-spin"></div>}
+          {!loading &&
+            searchData &&
             searchData?.length > 0 &&
             searchData.map((item, index) => (
               <ListShopItem key={item._id} data={item} />

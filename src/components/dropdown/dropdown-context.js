@@ -1,12 +1,15 @@
 import { createContext, useContext, useState } from "react";
+import { useClickOutside } from "../../hooks/useClickOutside";
 
 const DropdownContext = createContext();
 function DropdownProvider(props) {
-  const [show, setShow] = useState(false);
+  const {show,
+  setShow,
+  nodeRef,} = useClickOutside(false);
   const handleToggleDropdown = () => {
     setShow(!show);
   };
-  const values = { show, setShow, handleToggleDropdown, ...props };
+  const values = { show, setShow, nodeRef, handleToggleDropdown, ...props };
   return (
     <DropdownContext.Provider value={values}>
       {props.children}

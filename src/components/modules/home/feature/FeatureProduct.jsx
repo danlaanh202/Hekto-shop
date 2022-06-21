@@ -167,13 +167,15 @@ const FeatureProduct = ({ data = {} }) => {
           </Link>
         </div>
         <div className="feature-product-about transition-all">
-          <TextTruncate
-            line={1}
-            element="h3"
-            className="feature-product-about-name"
-            truncateText="…"
-            text={data.productName}
-          />
+          <Link to={`/products/${data._id}`}>
+            <TextTruncate
+              line={1}
+              element="h3"
+              className="feature-product-about-name"
+              truncateText="…"
+              text={data.productName}
+            />
+          </Link>
           <div className="feature-product-about-color">
             <span></span>
             <span></span>

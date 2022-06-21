@@ -131,9 +131,9 @@ const GridShopItem = ({ data }) => {
           ))}
         </div>
         <div className="product-introduce-price">
-          <span className="current-price price">{data.price.toFixed(2)}</span>
+          <span className="current-price price">${data.price.toFixed(2)}</span>
           <span className="old-price price">
-            {(data.price + 10).toFixed(2)}
+            ${(data.price + 10).toFixed(2)}
           </span>
         </div>
       </div>

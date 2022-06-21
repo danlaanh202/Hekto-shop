@@ -7,7 +7,7 @@ import {
   Navigate,
 } from "react-router-dom";
 import Layout from "./components/layout/Layout";
-import { navLink } from "./components/navbar/path";
+import 'react-toastify/dist/ReactToastify.css';
 import ScrollToTop from "./components/ScrollToTop";
 import {
   BlogsPage,
@@ -42,7 +42,9 @@ const App = () => {
             <Route path="/blog/:id" element={<SingleBlogPage />}></Route>
             <Route path="/blog" element={<BlogsPage />}></Route>
             <Route path="/register" element={<RegisterPage />}></Route>
-            <Route path="/add-product" element={<AddProductHide />}></Route>
+            <Route path="/add-product" 
+                element={!user ? <Navigate to="/" /> : <AddProductHide />}
+            ></Route>
             <Route path="/completed" element={<CartCompleted />}></Route>
             <Route path="/cart" element={<ShoppingCart />}></Route>
             <Route path="/shop" element={<ShopPage />}></Route>

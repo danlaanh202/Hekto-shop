@@ -1,33 +1,35 @@
 import React from "react";
 import styled from "styled-components";
 import { Dropdown } from "../../dropdown";
-
-const categories = [
-  { id: 1, name: "giay" },
-  { id: 2, name: "dep" },
-];
+import { useDropdown } from "../../dropdown/dropdown-context";
 
 const CategoryDropdownStyles = styled.div``;
-const CategoryDropdown = ({ setValue, setSelectCategory, ...props }) => {
+const CategoryDropdown = ({
+  setValue,
+  categories,
+  setSelectCategories,
+  selectCategories,
+}) => {
   const handleClickOption = (item) => {
-    //  setValue("categoryId", item.id);
-    //  setSelectCategory(item);
+    setSelectCategories(item);
+    setValue("category", item._id);
   };
+
   return (
     <CategoryDropdownStyles>
       <label htmlFor="categories">Categories</label>
       <Dropdown>
         <Dropdown.Select
-          placeholder={"Please select category"}
+          placeholder={selectCategories?.category || "Please select category"}
         ></Dropdown.Select>
         <Dropdown.List>
           {categories?.length > 0 &&
             categories.map((category) => (
               <Dropdown.Option
                 onClick={() => handleClickOption(category)}
-                key={category.id}
+                key={category._id}
               >
-                {category.name}
+                {category.category}
               </Dropdown.Option>
             ))}
         </Dropdown.List>
